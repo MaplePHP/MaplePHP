@@ -1,0 +1,78 @@
+
+html {
+    scroll-padding-top: 74px;
+}
+
+#header { position: fixed; left: 0; top: 0; }
+.smart-btn .lines, .smart-btn .line {
+    z-index: 10;
+}
+
+.smart-btn {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    cursor: pointer;
+}
+
+.smart-btn .lines {
+    width: 100%;
+    height: 10px;
+    position: relative;
+}
+
+.smart-btn .line {
+    width: 28px;
+    height: 2px;
+    margin: 0 auto;
+    background-color: #000;
+}
+
+.smart-btn .line + .line {
+    transform: translate3d(0, 8px, 0);
+}
+
+.nav-active .smart-btn {
+    background-color: #000;
+}
+
+.nav-active .smart-btn .line {
+    background-color: #FFF;
+    transform: rotate(45deg) translate3d(3px, 3px, 0);
+}
+
+.nav-active .smart-btn .line + .line {
+    transform: rotate(-45deg) translate3d(-3px, 3px, 0);
+}
+
+#nav {
+    width: 100%;
+    max-width: 360px;
+    position: fixed;
+    top: 0;
+    left: 100%;
+    bottom: 0;
+    background-color: #FFF;
+}
+
+#nav .scroller {
+    padding: 100px 30px 60px 30px;
+    height: 100%;
+    overflow: auto; -webkit-overflow-scrolling: touch;
+}
+
+.nav-active #nav {
+    transform: translate3d(-100%, 0, 0);
+}
+
+#nav li { padding: 0; }
+#nav .items, #nav .item, #nav a { display: block; }
+
+#nav li { font-size: 2.6rem; }
+#nav li a.nav-item { padding: 10px 0; }
+
+#nav li.active > a.nav-item {
+    color: inherit;
+    font-weight: bold;
+}
+

@@ -1,0 +1,36 @@
+[submodule "app/Libraries/Nest"]
+	path = app/Libraries/Nest
+	url = git@github.com:MaplePHP/Nest.git
+[submodule "app/Libraries/Http"]
+	path = app/Libraries/Http
+	url = git@github.com:MaplePHP/Http.git
+[submodule "app/Libraries/Container"]
+	path = app/Libraries/Container
+	url = git@github.com:MaplePHP/Container.git
+[submodule "app/Libraries/Handler"]
+	path = app/Libraries/Handler
+	url = git@github.com:MaplePHP/Handler.git
+[submodule "app/Libraries/Log"]
+	path = app/Libraries/Log
+	url = git@github.com:MaplePHP/Log.git
+[submodule "app/Libraries/Query"]
+	path = app/Libraries/Query
+	url = git@github.com:MaplePHP/Query.git
+[submodule "app/Libraries/Roles"]
+	path = app/Libraries/Roles
+	url = git@github.com:MaplePHP/Roles.git
+[submodule "app/Libraries/Form"]
+	path = app/Libraries/Form
+	url = git@github.com:MaplePHP/Form.git
+[submodule "app/Libraries/Validate"]
+	path = app/Libraries/Validate
+	url = git@github.com:MaplePHP/Validate.git
+[submodule "app/Libraries/DTO"]
+	path = app/Libraries/DTO
+	url = git@github.com:MaplePHP/DTO.git
+[submodule "app/Libraries/Output"]
+	path = app/Libraries/Output
+	url = git@github.com:MaplePHP/SwiftRender.git
+[submodule "app/Libraries/Cache"]
+	path = app/Libraries/Cache
+	url = git@github.com:MaplePHP/Cache.git

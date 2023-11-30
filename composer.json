@@ -1,0 +1,44 @@
+{
+    "name": "maplephp/maplephp",
+    "type": "project",
+    "description": " MaplePHP is a modern layered structure PHP framework with full PSR support.",
+    "keywords": ["framework", "psr", "php"],
+    "homepage": "https://wazabii.se",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Daniel Ronkainen",
+            "email": "daniel.ronkainen@wazabii.se"
+        },
+        {
+            "name": "MaplePHP",
+            "homepage": "https://wazabii.se"
+        }
+    ],
+    "scripts": {
+        "watch": "scss --watch ./resources/scss/style.scss:./public/css/style.css --style compressed",
+        "bundle": "esbuild --bundle ./resources/js/main.js --outdir=./public/js/ --minify --sourcemap",
+        "psalm": "psalm ./"
+    },
+    "require-dev": {
+        "filp/whoops": "^2.15"
+    },
+    "require": {
+        "php": ">=8.0",
+        "nikic/fast-route": "^1.3",
+        "phpmailer/phpmailer": "^6.8",
+        "maplephp/cache": "^1.0.0",
+        "maplephp/container": "^1.0.0",
+        "maplephp/dto": "^1.0.0",
+        "maplephp/form": "^1.0.0",
+        "maplephp/handler": "^1.0.0",
+        "maplephp/http": "^1.0.0",
+        "maplephp/log": "^1.0.0",
+        "maplephp/nest": "^1.0.0",
+        "maplephp/query": "^1.0.0",
+        "maplephp/roles": "^1.0.0",
+        "maplephp/swiftrender": "^1.0.0",
+        "maplephp/validate": "^1.0.0"
+    },
+    "minimum-stability": "dev"
+}

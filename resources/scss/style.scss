@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+$primaryBgColor: #343CE0;
+$secondaryBgColor: #F9F9FB;
+$thirdBgColor: #971EDE;
+
+$primaryTextColor: #3F4059;
+$secondaryTextColor: #90919B;
+$thirdTextColor: #971EDE;
+
+$borderColor: #D4D4E1;
+$redColor: #E31B1B;
+$linkTextColor: #375EFF;
+
+$textColors: (
+    "primary": $primaryTextColor, 
+    "secondary": $secondaryTextColor,
+    "third": $thirdTextColor,
+    "link": $linkTextColor,
+    "red": $redColor,
+    "white": #FFF
+);
+
+$bgColors: (
+    'primary': (
+        bg: $primaryBgColor,
+        text: #FFF,
+        border: $primaryBgColor,
+        hover: (
+            bg: darken($primaryBgColor, 5%),
+            text: #FFF,
+        )
+    ),
+    'secondary': (
+        bg: $secondaryBgColor,
+        text: $primaryTextColor,
+        border: $borderColor,
+        hover: (
+            bg: darken($secondaryBgColor, 5%),
+            text: none,
+        )
+    ),
+    'third': (
+        bg: $thirdBgColor,
+        text: #FFF,
+        border: $thirdBgColor,
+        hover: (
+            bg: darken($thirdBgColor, 5%),
+            text: none,
+        )
+    ),
+    'white': (
+        bg: #FFF,
+        text: none,
+        border: $borderColor,
+        hover: (
+            bg: darken(#FFF, 5%),
+            text: none,
+        )
+    ),
+    'black': (
+        bg: #000, /* BG color */ 
+        text: #FFF, /* Text color */ 
+        border: #000, /* Border color */ 
+        hover: (
+            bg: lighten(#000, 15%), /* BG color */ 
+            text: #FFF, /* Text color */ 
+        )
+    )
+);
+
+@import "fonts";
+@import "normalize";
+@import "grid";
+@import "extends/form";
+
+/*
+@import "extends/modal";
+@import "extends/editor";
+@import "extends/datepicker";
+*/
+
+/* Main --- START --- // Your code here --> */
+
+#header.active { background-color: #FFF; }
+#nav li > a { padding: 15px; }
+#nav li.active > a.item, #nav a.item:hover { color: $linkTextColor; }
+
+/*
+.wrapper, .screen-2xl, .xxl { max-width: 1536px; }
+.max-w-screen-xl { max-width: 1280px; }
+.max-w-screen-lg { max-width: 1024px; }
+.max-w-screen-md { max-width: 768px; }
+.max-w-screen-sm { max-width: 640px; }
+.max-w-screen-xs { max-width: 480px; }
+ */
+
+/* Main --- END --- */
+
+@media all and (max-width: 1536px) {
+    @include mediaQueryScreen();
+}
+
+@media all and (max-width: 1280px) {
+
+
+}
+
+@media all and (max-width: 1024px) {
+    @include mediaQueryTablet();
+    @import "smartNav";
+}
+
+@media all and (max-width: 768px) {
+}
+
+@media all and (max-width: 640px) {
+    @include mediaQueryPhone();
+}

@@ -1,0 +1,11 @@
+vendor/
+._*
+.DS_Store
+.sass-cache
+.env
+.php-cs-fixer.cache
+.smbdelete*
+node_modules/.package-lock.json
+storage/logs/*.log
+composer.lock
+package-lock.json
