@@ -1,12 +1,14 @@
-
-
 # MaplePHP
 **MaplePHP is a layered structure PHP framework** that has been meticulously crafted to provide developers with an intuitive, user-friendly experience that doesn't compromise on performance or scalability. By leveraging a modular architecture with **full PSR support**, the framework allows for easy customization and flexibility, enabling developers to pick and choose the specific components they need to build their applications. Overall, the PHP Fuse framework is an excellent choice for developers looking to build high-quality web applications quickly and efficiently.
+
+MaplePHP's commitment to **agnosticism** ensures that it remains **free of dependencies**, allowing developers the flexibility to choose dependencies based on their specific project needs rather than being dictated by the framework. The framework's streamlined approach guarantees it avoids bloat by incorporating only essential libraries, each serving a distinct purpose without redundancy.
+
+Moreover, MaplePHP sets itself apart through its seamless communication between the backend and the frontend, facilitated by Stratoxjs—a purpose-built tool tailored specifically for Maple. This integration enhances the framework's unique capabilities, fostering efficient and effective development of high-quality web applications.
 
 ## Installation
 Right now installation will only be available through **git** because of I have made every library as an **submodule**. This might change soon.
 ```
-git clone --recurse-submodules git@github.com:MaplePHP/MaplePHP.git myAppDir
+composer create-project maplephp/maplephp myApp
 ```
 
 ## Guides
