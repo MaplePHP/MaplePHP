@@ -1,4 +1,5 @@
 vendor/
+public/js/*
 ._*
 .DS_Store
 .sass-cache

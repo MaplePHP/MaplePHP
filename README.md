@@ -5,6 +5,11 @@ MaplePHP's commitment to **agnosticism** ensures that it remains **free of depen
 
 Moreover, MaplePHP sets itself apart through its seamless communication between the backend and the frontend, facilitated by Stratoxjs—a purpose-built tool tailored specifically for Maple. This integration enhances the framework's unique capabilities, fostering efficient and effective development of high-quality web applications.
 
+## Much more to be done
+The MaplePHP framework is still a work in progress, with over 800 points on my checklist that need attention—no exaggeration. Despite its incompleteness, I'm enthusiastic about showcasing its notable features. However, I advise against utilizing the framework for actual projects at this time. It's best to wait until version 1.1.0, by which point I'll have addressed all the existing issues and provided comprehensive documentation for a more stable and reliable experience.
+
+**With that said...** The libraries bellow is should all be stable.
+
 ## Installation
 Right now installation will only be available through **git** because of I have made every library as an **submodule**. This might change soon.
 ```
@@ -39,6 +44,8 @@ The guide is not complete. There is much more to come.
 - Emitter, CSP, Strict transport-security
 - Seamless communication between frontend and backend
 - Lightweight frontend code yet powerfull.
+
+
 
 ### Preview
 Guide will come
