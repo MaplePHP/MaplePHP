@@ -11,7 +11,6 @@ The MaplePHP framework is still a work in progress, with over 800 points on my c
 **With that said...** The libraries bellow is should all be stable.
 
 ## Installation
-Right now installation will only be available through **git** because of I have made every library as an **submodule**. This might change soon.
 ```
 composer create-project maplephp/maplephp myApp
 ```
