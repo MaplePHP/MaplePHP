@@ -1,4 +1,5 @@
 
+
 # MaplePHP
 **MaplePHP is a layered structure PHP framework** that has been meticulously crafted to provide developers with an intuitive, user-friendly experience that doesn't compromise on performance or scalability. By leveraging a modular architecture with **full PSR support**, the framework allows for easy customization and flexibility, enabling developers to pick and choose the specific components they need to build their applications. Overall, the PHP Fuse framework is an excellent choice for developers looking to build high-quality web applications quickly and efficiently.
 
@@ -43,6 +44,8 @@ php cli config install --type=app
 *Every value that comes with a default value can be skipped.*
 
 The app is installed... You can change ever value by either enter the install command again or by opening the **.env** file and manually change it.
+
+Access your application/site in the browser by navigating to the **"public/"** directory to observe it in action.
 
 ### Install database
 Execute the following command and follow the instructions:
