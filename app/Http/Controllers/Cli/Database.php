@@ -93,6 +93,8 @@ class Database extends Migrate implements CliInterface
             $insertID = $this->user->insertOrg($set)->insertID();
             $trans->commit();
 
+
+
             $this->cli->write("The user {$set['org_name']} ($insertID) has been created!");
         } catch (\Exception $e) {
             $trans->rollback();

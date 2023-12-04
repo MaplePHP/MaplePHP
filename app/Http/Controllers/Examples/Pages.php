@@ -25,9 +25,9 @@ class Pages extends BaseController
      */
     public function start(ResponseInterface $response, RequestInterface $request): ResponseInterface
     {
-        // Overwrite defualt meta
+        // Overwrite default meta
         // Meta is propagated by Models/Navbar and then meta it self in the middleware "DomManipulation" where
-        // som standard DOM element is preset.
+        // some standard DOM element is preset.
         //$this->head()->getElement("title")->setValue("Welcome to my awesome app");
         //$this->head()->getElement("description")->attr("content", "Some text about my awesome app");
 
@@ -39,7 +39,7 @@ class Pages extends BaseController
 
         // Auto clear cache on update and on a future pulish date!
         // withLastModified will only work with the middleware "LastModifiedHandler"
-        // It will tho autmatically be turned off IF session is open to make sure no important
+        // It will tho automatically be turned off IF session is open to make sure no important
         // information stays in cache.
         // return $response->withLastModified("2023-09-04 14:30:00")
         // ->withExpires($this->date()->withValue("+1 year")->format("Y-01-01"));
@@ -65,7 +65,7 @@ class Pages extends BaseController
         ]);
 
         // Browser cache content up to an hour
-        // This will work event with a open session
+        // This will work even with a session open so be careful
         // return $response->setCache($this->date()->getTimestamp(), 3600);
         return $response;
     }

@@ -8,8 +8,8 @@
 return [
     "mysql" => [
         'host' => 'localhost',
-        'database' => '',
-        'username' => '',
+        'database' => 'test',
+        'username' => 'root',
         'password' => '',
         'prefix' => 'maple_',
         'charset' => 'utf8mb4',

@@ -49,12 +49,12 @@ return [
         ]
     ],
     'mail' => [
-        'host' => 'smtp.gmail.com',
-        'port' => 465,
+        'host' => '',
+        'port' => '',
         'username' => '',
         'password' => '',
         'encryption' => 'ssl', // ssl/tls
-        'fromEmail' => '',
-        'fromName' => ''
+        'fromEmail' => 'john.doe@gmail.com',
+        'fromName' => 'John Doe'
     ]
 ];
