@@ -62,7 +62,26 @@ php cli config install --type=mail
 Mail has now been installed.
 
 ### Install Auth and login form
-Will continue with the guide tomorrow.
+#### Install the database:
+In the correct order!
+```
+php cli migrate create --table=organizations
+```
+```
+php cli migrate create --table=users
+```
+```
+php cli migrate create --table=login
+```
+#### Add organization
+```
+php cli database insertOrg
+```
+#### Add user
+```
+php cli database insertUser
+```
+*Now you can use the login form (take a look at the router file app/Http/Routes/web.php) and you will see that login controller is already prepared.*
 
 ## Library guides
 The guide is not complete. There is much more to come.

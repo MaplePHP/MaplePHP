@@ -11,6 +11,7 @@ use Http\Controllers\Cli\CliInterface;
 use Services\Stream\Cli as Stream;
 use Models\Users;
 use Services\Migration;
+use MaplePHP\Roles\Role;
 
 class Database extends Migrate implements CliInterface
 {
@@ -46,6 +47,7 @@ class Database extends Migrate implements CliInterface
                     }
                 );
             }
+
         } catch (\Exception $e) {
             $this->cli->write($e->getMessage());
         }
@@ -53,20 +55,33 @@ class Database extends Migrate implements CliInterface
 
     public function insertUser()
     {
+        $orgs = $this->user->getAllOrgs("org_id,org_name", function($row) {
+            return [$row->org_id => $row->org_name];
+        });
+
+        if(count($orgs) === 0) {
+            $this->cli->write("You must first create a organisation");
+            $this->cli->write("Enter the command:\n");
+            $this->cli->write("php cli database insertOrg\n");
+            return $this->cli->getResponse();
+        }
+
+        $orgID = $this->cli->chooseInput($orgs, "Choose organization");
 
         // User columns
         $userSet = [
-            'firstname' => $this->cli->step("Firstname"),
-            'lastname' => $this->cli->step("Lastname"),
-            'oid' => $this->cli->step("Org. ID"),
-            'phone' => $this->cli->step("Phone"),
-            'role' => $this->cli->step("Role", 1),
-            'create_date' => $this->cli->step("create_date", date("Y-m-d H:i:s", time()))
+            'firstname' => $this->cli->required("Firstname"),
+            'lastname' => $this->cli->required("Lastname"),
+            'oid' => $orgID,
+            'phone' => $this->cli->required("Phone", "phone"),
+            'role' => $this->cli->chooseInput(Role::getSupportedRoles(), "Choose role"),
+            'create_date' => date("Y-m-d H:i:s", time())
         ];
+
         // Login columns
-        $email = $this->cli->step("Email");
-        $password = $this->cli->step("Password");
-        $status = $this->cli->step("Enabled?", 1);
+        $email = $this->cli->required("Email", "email");
+        $password = $this->cli->maskedInput("Password", "lossyPassword");
+        $status = 1;
 
         $trans = DB::transaction();
         try {
@@ -85,19 +100,19 @@ class Database extends Migrate implements CliInterface
     public function insertOrg()
     {
         $set = [
-            'org_name' => $this->cli->step("Org. name"),
-            'org_create_date' => $this->cli->step("create_date", date("Y-m-d H:i:s", time()))
+            'org_name' => $this->cli->required("Org. name"),
+            'org_create_date' => date("Y-m-d H:i:s", time())
         ];
-        $trans = DB::transaction();
+
         try {
             $insertID = $this->user->insertOrg($set)->insertID();
-            $trans->commit();
+            $this->cli->write("The organisation {$set['org_name']} ($insertID) has been created!\n");
 
+            $this->cli->write("You can now add user to the organisation.");
+            $this->cli->write("Enter the command:\n");
+            $this->cli->write("php cli database insertUser\n");
 
-
-            $this->cli->write("The user {$set['org_name']} ($insertID) has been created!");
         } catch (\Exception $e) {
-            $trans->rollback();
             $this->cli->write($e->getMessage());
         }
 

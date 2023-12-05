@@ -5,6 +5,7 @@ namespace Services\Stream;
 use MaplePHP\Http\Interfaces\ResponseInterface;
 use MaplePHP\Http\Stream;
 use MaplePHP\Http\UploadedFile;
+use MaplePHP\Validate\Inp;
 use Exception;
 
 class Cli
@@ -32,7 +33,13 @@ class Cli
         }
     }
 
-    public function step(string $message, ?string $default = null, ?string $response = null)
+    /**
+     * Will create steps
+     * @param  string      $message
+     * @param  string|null $default
+     * @param  string|null $response
+     */
+    public function step(?string $message, ?string $default = null, ?string $response = null)
     {
         if (!is_null($default)) {
             $message .= " ({$default})";
@@ -46,7 +53,103 @@ class Cli
         return ($getLine ? $getLine : $default);
     }
 
-    public function write(string $message, bool $lineBreak = true)
+    /**
+     * Will mask out ouput stream
+     * @param  string|null $prompt
+     * @return string
+     */
+    function maskedInput(?string $prompt = null, string $valid = "required", array $args = []): string
+    {
+        $this->stream = new Stream(Stream::STDIN, "r");
+        $prompt = $this->prompt($prompt." (masked input)");
+
+        if(function_exists("shell_exec")) {
+            $this->stream->write($prompt);
+            // Mask input
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                // Not yet tested. But should work if my research is right
+                $input = rtrim(shell_exec("powershell -Command \$input = Read-Host -AsSecureString; [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR(\$input))"));
+            } else {
+                // Tested and works
+                $input = rtrim(shell_exec('stty -echo; read input; stty echo; echo $input'));
+            }
+
+            if(!$this->validate($input, $valid, $args)) {
+                $this->stream->write(PHP_EOL."Input is requied. Try again!".PHP_EOL);
+                $input = $this->maskedInput($prompt, $valid, $args);
+            }
+
+        } else {
+            $input = $this->step("Warning: The input will not be mask. Your server do not support the \"shell_exec\" function. MaplePHP is using shell_exec to mask the input.\n\nPress Enter to continue");
+            $this->required($prompt, $valid, $args);
+        }
+
+        $this->stream->write(PHP_EOL);
+        return $input;
+    }
+
+    /**
+     * Will give you multiple option to choose between 
+     * @param  array  $choises
+     * @return string
+     */
+    public function chooseInput(array $choises, ?string $prompt = null): string
+    {
+        if(count($choises) === 0) {
+            throw new Exception("Arg1 choises is an empty array!", 1);
+        }
+
+        $keys = array_keys($choises);
+        $firstOpt = reset($keys);
+        $lastOpt = end($keys);
+
+        $out = $this->prompt($prompt, "Choose input")."\n";
+        foreach($choises as $key => $value) {
+            $out .= "{$key}: {$value}\n";
+        }
+        $this->write($out);
+
+        $message = "Choose input between ({$firstOpt}-{$lastOpt})";
+        if($firstOpt === $lastOpt) {
+            $message = "You can at the moment only choose ({$firstOpt})";
+        }
+        $value = $this->required($message);
+        if(!isset($choises[$value])) {
+            $value = $this->chooseInput($choises);
+        }
+        return $value;
+    }
+
+    /**
+     * Will make input required
+     * @param  string|null $message
+     * @return string
+     */
+    public function required(?string $message, string $valid = "required", array $args = []): string
+    {
+        $line = $this->step($message);
+        if(!$this->validate((string)$line, $valid, $args)) {
+            $line = $this->required($message, $valid, $args);
+        }
+        return $line;
+    }
+
+    protected function validate(string $value, string $valid = "required", array $args = [])
+    {
+        $inp = new Inp($value);
+        if(!method_exists($inp, $valid)) {
+            throw new Exception("The validation do not exists", 1);
+        }
+        return call_user_func_array([$inp, $valid], $args);
+    }
+
+    /**
+     * Write to stream
+     * @param  string       $message
+     * @param  bool|boolean $lineBreak
+     * @return void
+     */
+    public function write(string $message, bool $lineBreak = true): void
     {
         if ($lineBreak) {
             $message = "{$message}\n";
@@ -118,5 +221,11 @@ class Cli
     public function getConfig(): array
     {
         return (array)$_ENV['config'];
+    }
+
+    protected function prompt(?string $prompt = null, string $default = "Input your value"): string
+    {
+        $prompt = (is_null($prompt) ? $default : $prompt);
+        return rtrim($prompt, ":").":";
     }
 }

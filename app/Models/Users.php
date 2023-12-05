@@ -103,10 +103,10 @@ class Users
     * @param  string $col
     * @return array
     */
-    public function getAllOrgs(string $col = "org_id,org_name"): array
+    public function getAllOrgs(string $col = "org_id,org_name", ?callable $callback = null): array
     {
         $select = $this->database::select($col, new OrgDBStructure());
-        return $select->fetch();
+        return $select->fetch($callback);
     }
 
 
