@@ -8,6 +8,10 @@ use MaplePHP\Http\UploadedFile;
 use MaplePHP\Validate\Inp;
 use Exception;
 
+/**
+ * Is used to install dkim packages to extend MaplePHP functionallity
+ * @psalm-suppress ForbiddenCode
+ */
 class Cli
 {
     private $stream;
@@ -68,10 +72,10 @@ class Cli
             // Mask input
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
                 // Not yet tested. But should work if my research is right
-                $input = rtrim(shell_exec("powershell -Command \$input = Read-Host -AsSecureString; [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR(\$input))"));
+                $input = rtrim((string)shell_exec("powershell -Command \$input = Read-Host -AsSecureString; [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR(\$input))"));
             } else {
                 // Tested and works
-                $input = rtrim(shell_exec('stty -echo; read input; stty echo; echo $input'));
+                $input = rtrim((string)shell_exec('stty -echo; read input; stty echo; echo $input'));
             }
 
             if(!$this->validate($input, $valid, $args)) {

@@ -1,5 +1,6 @@
 
 
+
 # MaplePHP
 **MaplePHP is a layered structure PHP framework** that has been meticulously crafted to provide developers with an intuitive, user-friendly experience that doesn't compromise on performance or scalability. By leveraging a modular architecture with **full PSR support**, the framework allows for easy customization and flexibility, enabling developers to pick and choose the specific components they need to build their applications. Overall, the PHP Fuse framework is an excellent choice for developers looking to build high-quality web applications quickly and efficiently.
 
@@ -62,6 +63,7 @@ php cli config install --type=mail
 Mail has now been installed.
 
 ### Install Auth and login form
+*Require MaplePHP framework 1.0.4*
 #### Install the database:
 In the correct order!
 ```
