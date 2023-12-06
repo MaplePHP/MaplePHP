@@ -14,8 +14,8 @@ The primary installation.
 ```
 composer create-project maplephp/maplephp myApp
 ```
-## Update MaplePHP
-As of version 2.0.0 and beyond MaplePHP you will only need to execute the command bellow to update Maple to its latest version.
+## Updating MaplePHP
+Starting from version 2.0.0 and beyond, updating MaplePHP to the latest version is as simple as running the command below.
 ```
 composer update
 ```
@@ -73,12 +73,18 @@ php cli database insertUser
 
 ## Library guides
 The guide is not complete. There is much more to come.
- - [Cache](https://github.com/MaplePHP/Cache)
+ - [Routing](https://github.com/MaplePHP/Handler)
  - [Container](https://github.com/MaplePHP/Container)
+ - [Dependency injector](https://github.com/MaplePHP/Container#the-dependency-injector)
+ - [Http](https://github.com/MaplePHP/Http)
+ - [Request](https://github.com/MaplePHP/Http#request)
+ - [Response](https://github.com/MaplePHP/Http#response)
+ - [Messaging](https://github.com/MaplePHP/Http#message)
+ - [Stream](https://github.com/MaplePHP/Http#stream)
+ - [Client requests](https://github.com/MaplePHP/Http#create-a-request)
+ - [Cache](https://github.com/MaplePHP/Cache)
  - [DTO](https://github.com/MaplePHP/DTO)
  - [Form](https://github.com/MaplePHP/Form)
- - [Handler](https://github.com/MaplePHP/Handler)
- - [Http](https://github.com/MaplePHP/Http)
  - [Log](https://github.com/MaplePHP/Log)
  - [Output](https://github.com/MaplePHP/SwiftRender)
  - [Query](https://github.com/MaplePHP/Query)
@@ -100,12 +106,9 @@ The guide is not complete. There is much more to come.
 - Seamless communication between frontend and backend
 - Lightweight frontend code yet powerfull.
 
-
-
 ### Preview
 Guide will come
 ```php
-
 namespace Http\Controllers;
 
 use MaplePHP\Http\Interfaces\ResponseInterface;
