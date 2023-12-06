@@ -1,3 +1,4 @@
+
 # MaplePHP
 **MaplePHP is a layered structure PHP framework** that has been meticulously crafted to provide developers with an intuitive, user-friendly experience that doesn't compromise on performance or scalability. By leveraging a modular architecture with **full PSR support**, the framework allows for easy customization and flexibility, enabling developers to pick and choose the specific components they need to build their applications. Overall, the PHP Fuse framework is an excellent choice for developers looking to build high-quality web applications quickly and efficiently.
 
@@ -6,33 +7,18 @@ MaplePHP's commitment to **agnosticism** ensures that it remains **free of depen
 Moreover, MaplePHP sets itself apart through its seamless communication between the backend and the frontend, facilitated by Stratoxjs—a purpose-built tool tailored specifically for Maple. This integration enhances the framework's unique capabilities, fostering efficient and effective development of high-quality web applications.
 
 ## Much more to be done
-The MaplePHP framework is still a work in progress, with over 800 points on my checklist that need attention—no exaggeration. I am tho eager to highlight its noteworthy features. However, I recommend refraining from using the framework in live projects at the moment. It would be prudent to wait for version 1.1.0, when I have check off all the points and can offer a comprehensive documentation, ensuring a more user firendly user experience.
+In recent developments, MaplePHP has reached a significant milestone with the release of **version 2.0.0+**. This signifies the conclusion of its beta phase, marking the completion of every structural change. While substantial progress has been achieved, there is still much on the horizon. Ongoing tasks include **rigorous quality testing** and **comprehensive documentation updates**, all aimed at ensuring an even more user-friendly experience for developers.
 
 ## Installation
 The primary installation.
 ```
 composer create-project maplephp/maplephp myApp
 ```
-
-## Git Installation
-If you want to access all the git repositories and contribute then choose this installation.
-
-#### 1. Clone the repo with all submodules
+## Update MaplePHP
+As of version 2.0.0 and beyond MaplePHP you will only need to execute the command bellow to update Maple to its latest version.
 ```
-git clone --recurse-submodules -j8 git@github.com:MaplePHP/MaplePHP.git myApp
+composer update
 ```
-*As of the git version 2.8 the -j8 can be used as an performance optimizer and will fetch submodules at a time in parallel*
-
-#### 2. Install dependencies
-```
-composer install
-```
-#### 3. Remove MaplePHP directory in vendor
-All **MaplePHP** libraries now reside in the "app/Libraries/" directory. However, it's important to note that MaplePHP also exist in the vendor directory from the **composer install** and will take precedence. Therefore, if you wish to contribute, please ensure that you **remove** the MaplePHP directory from the vendor directory (vendor/maplephp/).
-```
-rm -rf vendor/maplephp
-```
-*If you are on a unix system you can execute above.*
 
 ## Install the app
 From you apps root directory (where the file **cli** exists) execute the following command and follow the instructions:
