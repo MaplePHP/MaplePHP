@@ -4,12 +4,12 @@ namespace Http\Controllers;
 
 use MaplePHP\Http\Interfaces\ResponseInterface;
 use MaplePHP\Http\Interfaces\RequestInterface;
-use Services\ServiceProvider;
+use MaplePHP\Foundation\Http\Provider;
 use Http\Controllers\BaseController;
 
 class HttpRequestError extends BaseController
 {
-    public function __construct(ServiceProvider $provider)
+    public function __construct(Provider $provider)
     {
     }
 

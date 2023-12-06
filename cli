@@ -1,42 +1,8 @@
 #!/usr/bin/env php
 <?php
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
 
-use MaplePHP\Core\App;
-use MaplePHP\Http;
-use MaplePHP\Handler;
-use MaplePHP\Container\Container;
-
+use MaplePHP\Foundation\Kernel\Kernel;
 $dir = dirname(__FILE__).'/';
-require_once("{$dir}app/Core/autoload.php");
-
-$stream = new Http\Stream(Http\Stream::TEMP);
-$response = new Http\Response($stream);
-$env = new Http\Environment();
-
-$request = new Http\ServerRequest(new Http\Uri($env->getUriParts([
-    "dir" => $dir,
-    "argv" => $argv
-])), $env);
-
-$container = new Container();
-$routes = new Handler\RouterDispatcher($response, $request);
-$emitter = new Handler\Emitter($container);
-$app = new App($emitter, $routes);
-
-$app->enableJsonErrorHandler();
-$app->setContainer($container);
-$app->setRouterFiles(["cli"]);
-$app->enableTemplateEngine(false);
-if(($argv[1] ?? NULL) === "config") $app->enableDatabaseEngine(false);
-
-// bool $displayError, bool $niceError, bool $logError, string $logErrorFile
-//$emitter->errorHandler(false, false, true, "/var/www/html/systems/logger-cli.txt");
-
-
-// Set current URI path
-$routes->setRequestMethod("CLI");
-$routes->setDispatchPath($request->getCliKeyword());
-$app->run();
+require_once("{$dir}app/Libraries/Foundation/autoload.php");
+$kernel = new Kernel($dir);
+$kernel->runCli($argv);

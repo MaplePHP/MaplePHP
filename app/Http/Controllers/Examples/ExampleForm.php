@@ -5,16 +5,16 @@ namespace Http\Controllers\Examples;
 use MaplePHP\Http\Interfaces\ResponseInterface;
 use MaplePHP\Http\Interfaces\RequestInterface;
 use Http\Controllers\BaseController;
-use Services\ServiceProvider;
-use Services\Forms\Validate;
-use Services\Forms\ContactForm as Form;
+use MaplePHP\Foundation\Http\Provider;
+use MaplePHP\Foundation\Form\Validate;
+use MaplePHP\Foundation\Form\Forms\ContactForm;
 
 class ExampleForm extends BaseController
 {
     protected $form;
     protected $validate;
 
-    public function __construct(ServiceProvider $provider, Form $form, Validate $validate)
+    public function __construct(Provider $provider, ContactForm $form, Validate $validate)
     {
         $this->form = $form;
         $this->validate = $validate;

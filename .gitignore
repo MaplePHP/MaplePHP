@@ -8,5 +8,6 @@ public/js/*
 .smbdelete*
 node_modules/.package-lock.json
 storage/logs/*.log
+storage/caches/*.cache
 composer.lock
 package-lock.json

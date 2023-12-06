@@ -3,7 +3,7 @@
 namespace Http\Controllers;
 
 use MaplePHP\Container\Interfaces\ContainerInterface;
-use Services\ServiceProvider;
+use MaplePHP\Foundation\Http\Provider;
 use BadMethodCallException;
 
 abstract class BaseController
@@ -17,10 +17,10 @@ abstract class BaseController
     public function __call(string $method, array $args): mixed
     {
         if ($method === "has") {
-            return call_user_func_array([ServiceProvider::$container, $method], $args);
+            return call_user_func_array([Provider::$container, $method], $args);
         }
-        if ((ServiceProvider::$container instanceof ContainerInterface) && ServiceProvider::$container->has($method)) {
-            return ServiceProvider::$container->get($method, $args);
+        if ((Provider::$container instanceof ContainerInterface) && Provider::$container->has($method)) {
+            return Provider::$container->get($method, $args);
         } else {
             throw new BadMethodCallException('The method "' . $method . '" does not exist in the Container or the Class "' . static::class . '"!', 1);
         }

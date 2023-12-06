@@ -4,7 +4,7 @@ namespace Http\Controllers\Examples;
 
 use MaplePHP\Http\Interfaces\ResponseInterface;
 use MaplePHP\Http\Interfaces\RequestInterface;
-use Services\ServiceProvider;
+use MaplePHP\Foundation\Http\Provider;
 use Http\Controllers\BaseController;
 
 class Pages extends BaseController
@@ -13,7 +13,7 @@ class Pages extends BaseController
     protected $responder;
     protected $users;
 
-    public function __construct(ServiceProvider $provider)
+    public function __construct(Provider $provider)
     {
     }
 

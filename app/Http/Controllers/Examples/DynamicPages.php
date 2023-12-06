@@ -6,14 +6,12 @@ use MaplePHP\Http\Interfaces\ResponseInterface;
 use MaplePHP\Http\Interfaces\RequestInterface;
 use MaplePHP\Http\Interfaces\UrlInterface;
 use MaplePHP\Container\Interfaces\ContainerInterface;
-use MaplePHP\Services\Forms;
 use MaplePHP\Output\Json;
-use Models\Navbar;
+use MaplePHP\Foundation\Nav\Navbar;
 
 class DynamicPages
 {
     protected $url;
-    protected $forms;
     protected $json;
     protected $container;
     protected $nav;

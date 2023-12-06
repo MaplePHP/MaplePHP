@@ -25,20 +25,7 @@
     },
     "require": {
         "php": ">=8.0",
-        "nikic/fast-route": "^1.3",
-        "phpmailer/phpmailer": "^6.8",
-        "maplephp/cache": "^1.0.0",
-        "maplephp/container": "^1.0.0",
-        "maplephp/dto": "^1.0.0",
-        "maplephp/form": "^1.0.0",
-        "maplephp/handler": "^1.0.0",
-        "maplephp/http": "^1.0.0",
-        "maplephp/log": "^1.0.0",
-        "maplephp/nest": "^1.0.0",
-        "maplephp/query": "^1.0.0",
-        "maplephp/roles": "^1.0.0",
-        "maplephp/swiftrender": "^1.0.0",
-        "maplephp/validate": "^1.0.0"
+        "maplephp/foundation": "^1.0.0"
     },
     "autoload": {
         "psr-4": {

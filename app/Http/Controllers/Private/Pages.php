@@ -4,14 +4,14 @@ namespace Http\Controllers\Private;
 
 use MaplePHP\Http\Interfaces\ResponseInterface;
 use MaplePHP\Http\Interfaces\RequestInterface;
-use Services\ServiceProvider;
+use MaplePHP\Foundation\Http\Provider;
 use Http\Controllers\BaseController;
 
 class Pages extends BaseController
 {
     public const LOGOUT_PATH = "/login";
 
-    public function __construct(ServiceProvider $provider)
+    public function __construct(Provider $provider)
     {
     }
 

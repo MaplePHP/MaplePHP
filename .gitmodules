@@ -34,3 +34,6 @@
 [submodule "app/Libraries/Cache"]
 	path = app/Libraries/Cache
 	url = git@github.com:MaplePHP/Cache.git
+[submodule "app/Libraries/Foundation"]
+	path = app/Libraries/Foundation
+	url = git@github.com:MaplePHP/Foundation.git

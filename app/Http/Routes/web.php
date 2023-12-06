@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Find all, string number: [^/]+
  * IF match or else: (?:match|elseMatch)
@@ -38,27 +37,33 @@ $routes->group(function ($routes) {
 
         // Public login area
         $routes->group(function ($routes) {
+
             // Regular page with form
             $routes->get("/{page:login}", ['Http\Controllers\Private\Login', "form"]);
+
             // Open form in a modal with ajax call
             $routes->get("/{page:login}/{model:model}", ['Http\Controllers\Private\Login', "formModel"]);
+
             // Login request
             $routes->post("/{page:login}", ['Http\Controllers\Private\Login', "login"]);
 
-            $routes->get("/{page:login}/{type:forgot}", ['Http\Controllers\Private\Login', "forgotPasswordForm"]);
-            $routes->post("/{page:login}/{type:forgot}", ['Http\Controllers\Private\Login', "forgotPasswordPost"]);
+            // Forgot
+            $routes->get("/{page:login}/{type:forgot}", ['Http\Controllers\Private\Login', 'forgotPasswordForm']);
+            $routes->post("/{page:login}/{type:forgot}", ['Http\Controllers\Private\Login', 'forgotPasswordPost']);
 
             // Change password
             $routes->get("/{page:login}/{type:reset}/{token:[^/]+}", [
                 'Http\Controllers\Private\Login',
                 "resetPasswordForm"
             ]);
+
             $routes->post("/{page:login}/{type:reset}/{token:[^/]+}", [
                 'Http\Controllers\Private\Login',
                 "resetPasswordPost"
             ]);
+
         }, [
-            [Http\Middlewares\LoggedIn::class, "publicZone"],
+            [MaplePHP\Foundation\Auth\Middleware\LoggedIn::class, "publicZone"],
         ]);
 
 
@@ -69,15 +74,17 @@ $routes->group(function ($routes) {
 
             // Profile page
             $routes->get("/{profile:profile}", ['Http\Controllers\Private\Pages', "profile"]);
+
+
         }, [
-            [Http\Middlewares\LoggedIn::class, "privateZone"]
+            [MaplePHP\Foundation\Auth\Middleware\LoggedIn::class, "privateZone"]
         ]);
     }, [
-        Http\Middlewares\SessionStart::class
+        MaplePHP\Foundation\Auth\Middleware\SessionStart::class
     ]);
+
 }, [
-    //Http\Middlewares\Profiling::class,
-    Http\Middlewares\LastModifiedHandler::class, // Wont wotk with SESSION
-    Http\Middlewares\Navigation::class,
-    Http\Middlewares\DomManipulation::class
+    MaplePHP\Foundation\Cache\Middleware\LastModified::class,
+    MaplePHP\Foundation\Nav\Middleware\Navigation::class,
+    MaplePHP\Foundation\Dom\Middleware\Meta::class
 ]);

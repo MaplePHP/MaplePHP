@@ -19,14 +19,6 @@ return [
         'bundle' => $this->getenv("NONCE"),
         'maintainer' => 'Daniel Ronkainen <daniel@creativearmy.se>'
     ],
-    'providers' => [
-        'services' => [
-            'logger' => '\Services\ServiceLogger',
-            'lang' => '\Services\ServiceLang',
-            'responder' => '\Services\ServiceResponder',
-            'cookies' => '\Services\ServiceCookie'
-        ]
-    ],
     'session' => [
         "time" => 360, // minutes
         "ssl" => 1 // Strict: SSL only flag

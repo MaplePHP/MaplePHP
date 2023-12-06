@@ -6,27 +6,28 @@ namespace Http\Controllers\Private;
 use MaplePHP\Http\Interfaces\ResponseInterface;
 use MaplePHP\Http\Interfaces\RequestInterface;
 use Http\Controllers\BaseController;
-use Services\ServiceProvider;
-use Services\Forms\LoginForm;
-use Services\Users\LoginService;
-use Services\ServiceMail;
+use MaplePHP\Foundation\Http\Provider;
+use MaplePHP\Foundation\Form\Forms\LoginForm;
+use MaplePHP\Foundation\Auth\Validation;
+use MaplePHP\Foundation\Mail\PHPMailerHandler;
 
 class Login extends BaseController
 {
+    protected const LOGIN_PATH = "/profile";
+
     protected $form;
     protected $mail;
-    protected $loginService;
-    protected $attempt = 0;
+    protected $auth;
 
     public function __construct(
-        ServiceProvider $provider,
-        LoginService $loginService,
+        Provider $provider,
+        Validation $auth,
         LoginForm $form,
-        ServiceMail $mail
+        PHPMailerHandler $mail
     ) {
         $this->form = $form;
         $this->mail = $mail;
-        $this->loginService = $loginService;
+        $this->auth = $auth;
     }
 
     public function form(ResponseInterface $response, RequestInterface $request): ResponseInterface
@@ -81,14 +82,12 @@ class Login extends BaseController
      */
     public function login(ResponseInterface $response, RequestInterface $request): object
     {
-        $user = $this->loginService->validate($request);
+        $user = $this->auth->validate($request);
         if ($user) {
-            $this->responder()->redirect($this->url()->getRoot(\Http\Middlewares\LoggedIn::LOGIN_PATH));
+            $this->responder()->redirect($this->url()->getRoot(static::LOGIN_PATH));
         } else {
             $this->responder()->error($this->local("auth")->get("wrongCredentials", "Wrong credentials"));
         }
-
-        $this->attempt++;
         return $this->responder()->build();
     }
 
@@ -129,7 +128,7 @@ class Login extends BaseController
         if (!is_array($param)) {
             throw new \Exception("Parsed body is empty", 1);
         }
-        $user = $this->loginService->generateForgetToken($param['email']);
+        $user = $this->auth->generateForgetToken($param['email']);
         if (is_object($user)) {
             $changeURL = $this->url()->select("page")->add(["reset", $user->token])->getUrl();
             $view = $this->view()->withView("mail/text", [
@@ -153,7 +152,7 @@ class Login extends BaseController
                     ],
                     [
                         "content" => "<em>" . $this->local("auth")->get("linkWillExpire", null, [
-                            $this->loginService::FORGET_TOKEN_EXPIRE . " hours"
+                            $this->auth::FORGET_TOKEN_EXPIRE . " hours"
                         ]) . "</em>",
                     ]
                 ],
@@ -186,8 +185,8 @@ class Login extends BaseController
     public function resetPasswordForm(ResponseInterface $response, RequestInterface $request): ResponseInterface
     {
 
-        $this->loginService->token()->setToken($this->url()->select(["token"])->get(), false);
-        $userID = $this->loginService->token()->validate();
+        $this->auth->token()->setToken($this->url()->select(["token"])->get(), false);
+        $userID = $this->auth->token()->validate();
         if ($userID) {
             $this->view()->setPartial("form", [
                 "name" => $this->local("auth")->get(["fillIn", "password"]),
@@ -216,14 +215,14 @@ class Login extends BaseController
         if (!is_array($param)) {
             throw new \Exception("Parsed body is empty", 1);
         }
-        if (!$this->loginService->validatePassword($param['password'])) {
+        if (!$this->auth->validatePassword($param['password'])) {
             $this->responder()->error($this->local("auth")->get("invalidPassword", "invalid password"));
         } else {
-            $this->loginService->token()->setToken($this->url()->select(["token"])->get(), false);
-            $userID = $this->loginService->token()->validate();
+            $this->auth->token()->setToken($this->url()->select(["token"])->get(), false);
+            $userID = $this->auth->token()->validate();
             if ($userID !== false && is_int($userID)) {
-                $this->loginService->updatePassword($userID, $param['password']);
-                $this->loginService->token()->disable($userID);
+                $this->auth->updatePassword($userID, $param['password']);
+                $this->auth->token()->disable($userID);
 
                 $message = $this->local("auth")->get("youPasswordChanged", "Your password has changed");
                 $this->responder()->okRedirect($message, $this->url()->select("page")->getUrl());
