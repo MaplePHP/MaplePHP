@@ -151,7 +151,7 @@ class Login extends BaseController
                         ]
                     ],
                     [
-                        "content" => "<em>" . $this->local("auth")->get("linkWillExpire", null, [
+                        "content" => "<em>" . $this->local("auth")->get("linkWillExpire", "Please note that this link will expire", [
                             $this->auth::FORGET_TOKEN_EXPIRE . " hours"
                         ]) . "</em>",
                     ]
