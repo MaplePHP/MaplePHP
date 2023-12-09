@@ -5,14 +5,40 @@
  * Copyright: Apache License 2.0
  */
 
-import { StratoxDom as $ } from './StratoxDom.js';
-import { StratoxTemplate } from './StratoxTemplate.js';
+import { StratoxItem } from './StratoxItem.js';
 
-export class StratoxBuilder extends StratoxTemplate {
+export class StratoxBuilder {
 
-    static #factory = {};
+    static _factory = {};
+    
+    json;
+    value = "";
+    label = "";
+    description = "";
+    values = null;
+    name = "";
+    nameJoin = "";
+    nameSplit = Array();
+    index = 0;
+    key;
+    fields = {};
+    attr = {};
+    hasFields = true;
+    config = {};
+    configList = {};
+    settings = {}
+    containerInst;
+
     #values = {};
+    #helper;
     #hasGroupEvents = false;
+
+    constructor(json, key, settings, container) {
+        this.json = json;
+        this.key = key;
+        this.settings = settings;
+        this.containerInst = container;
+    }
 
     /**
      * Create a new component
@@ -21,7 +47,7 @@ export class StratoxBuilder extends StratoxTemplate {
      */
     static setComponent(key, fn) {
         if(typeof fn !== "function") throw new Error("The argument 2 in @prepareView has to be a callable");
-        this.#factory[key] = fn;
+        this._factory[key] = fn;
     }
 
     /**
@@ -30,7 +56,7 @@ export class StratoxBuilder extends StratoxTemplate {
      * @return {callable|false}
      */
     getComponent(key) {
-        return (StratoxBuilder.#factory[key]) ? StratoxBuilder.#factory[key] : false;
+        return (StratoxBuilder._factory[key]) ? StratoxBuilder._factory[key] : false;
     }
 
     /**
@@ -49,13 +75,27 @@ export class StratoxBuilder extends StratoxTemplate {
      */
     getAttr(defArgs) {
         if(typeof defArgs !== "object") defArgs = {};
-        let attr = "", objFor = $.extend(defArgs, this.attr);
+        let attr = "", objFor = Object.assign(defArgs, this.attr);
         for(const [key, value] of Object.entries(objFor)) attr += ' '+key+'="'+value+'"';
         return attr;
     }
 
     /**
+     * This will make it posible for you to build manual forms in your views
+     * @param  {string} fieldName
+     * @param  {object} args
+     * @return {static}
+     */
+    withField(fieldName, args) {
+        let clone = new this.constructor();
+        const item = StratoxItem.form(fieldName, args);
+        Object.assign(clone, item.get());
+        return clone;
+    }
+
+    /**
      * Set form values
+     * All sets except for value should be a new instance to keep immutability
      * @param object Global values input/field name (example: { name: "About us", permlink: "about-us" } )
      */
     setValues(values) {
@@ -79,8 +119,8 @@ export class StratoxBuilder extends StratoxTemplate {
      * @return {Boolean}
      */
     isChecked(value) {
-        if($.isArray(this.value)) {
-            return $.inArray(value, this.value);
+        if(this.containerInst.get("view").isArray(this.value)) {
+            return this.value.includes(value);
         }
         return (this.value == value);
     }
@@ -115,14 +155,13 @@ export class StratoxBuilder extends StratoxTemplate {
      * @return {string}
      */
     groupFactory(callback, builder) {
-
         this.#hasGroupEvents = true;
 
-        let out = "", fields = {}, inst = this, nk = 0, nj = inst.nameJoin, cloneFields = $.extend({}, inst.fields), 
+        let out = "", fields = {}, inst = this, nk = 0, nj = inst.nameJoin, cloneFields = Object.assign({}, inst.fields), 
         length = this.getValueLength(1), config = this.config;
-        if(!$.isArray(this.value)) this.value = Array("");
+        if(!this.containerInst.get("view").isArray(this.value)) this.value = Array("");
 
-        $.each(this.value, function(k, a) {
+        if(typeof this.value === "object") for(const [k, a] of Object.entries(this.value)) {
             let o = "", btnIndex = inst.index, nestedNames = (config.nestedNames !== undefined && config.nestedNames === true);
 
             if(config.controls !== undefined && config.controls === true) {
@@ -131,16 +170,14 @@ export class StratoxBuilder extends StratoxTemplate {
                 o += '<a class="wa-field-group-btn form-group-icon before abs middle top over-2" data-name="'+nj+'" data-key="'+inst.key+'" data-index="'+btnIndex+'" data-position="'+k+'" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><path d="M16 2 L16 30 M2 16 L30 16" /></svg></a>';
             }
 
-            $.each(cloneFields, function(name, arr) {
-                //arr.config = $.extend((arr.config ?? {}), config);
+            if(typeof cloneFields === "object") for(const [name, arr] of Object.entries(cloneFields)) {
                 let fk = (nestedNames) ? nj+","+nk+","+name : name;
                 fields[fk] = arr;
                 o += inst.#html(fields, false);
-
                 // Is grp then skip index (see @html and @#build). (Changed)
                 //o += inst.#html(fields, (arr.type === "group"));
                 fields = {};
-            });
+            };
 
             nk++;
             if(config.controls !== undefined && config.controls === true) {
@@ -148,7 +185,7 @@ export class StratoxBuilder extends StratoxTemplate {
                 o += '</div>';
             }
             out += callback(o, a);
-        });
+        }
         return out;
     }
     
@@ -192,7 +229,7 @@ export class StratoxBuilder extends StratoxTemplate {
      */
     getValueLength(minVal) {
         let length = 0;
-        if(this.value && $.isArray(this.value)) length = this.value.length;
+        if(this.value && this.containerInst.get("view").isArray(this.value)) length = this.value.length;
         if(typeof minVal === "number" && length <= minVal) length = minVal;
         return length;
     }
@@ -226,16 +263,19 @@ export class StratoxBuilder extends StratoxTemplate {
         this.config = (typeof this.data.config === "object") ? this.data.config : {};
         this.hasFields = (typeof this.data.hasFields === "boolean") ? this.data.hasFields : false;
 
-        $.extend(this.configList, this.config);
+        Object.assign(this.configList, this.config);
         this.#buildFieldNames();
         this.attr['data-name'] = this.nameJoin;
 
         let val = this.#padFieldValues(), out, fn, formatedData;
         if((typeof this[this.data.type] === "function") || (fn = this.getComponent(this.data.type))) {
+
+            const helper = this.#getHelper();
+
             if(typeof fn === "function") {
-                out = fn.apply(this.containerInst.get("view"), [(this.data.data ?? {}), this.containerInst, $, this]);
+                out = fn.apply(this.containerInst.get("view"), [(this.data.data ?? {}), this.containerInst, helper, this]);
             } else {
-                out = this[this.data.type]();
+                out = this.#getField(this.data.type);
             }         
             this.index++;
             return (out ? out : "");
@@ -244,6 +284,28 @@ export class StratoxBuilder extends StratoxTemplate {
             this.containerInst.get("view").observer().stop();
             console.error('The component/view named "'+this.data.type+'" does not exist.');
         }
+    }
+
+    /**
+     * Get Field
+     * @param  {string} fieldType
+     * @return {string}
+     */
+    #getField(fieldType) {
+        const helper = this.#getHelper();
+        return this[fieldType](helper);
+    }
+
+    /**
+     * Get helper
+     * @return {mixed}
+     */
+    #getHelper() {
+        if(!this.#helper) {
+            this.#helper = this.containerInst.get("view")._getConfig("handlers").helper;
+            if(typeof this.#helper === "function") this.#helper = this.#helper(this);
+        }
+        return this.#helper;
     }
 
     /**

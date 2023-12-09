@@ -31,8 +31,9 @@ return [
         "Strict-Transport-Security" => "max-age=31536000; includeSubDomains",
         "Content-Security-Policy" => [
             "default-src" => "'self'",
-            "script-src" => "'nonce-" . $this->getenv("NONCE") . "'",
-            "style-src" => "'self'",
+            "script-src" => "'nonce-" . $this->getenv("NONCE") . "' 'unsafe-inline'",
+            "script-src-elem" => "'self' 'unsafe-inline'",
+            "style-src" => "'self' 'unsafe-inline'",
             "object-src" => "'self'",
             "img-src" => "'self'",
             "frame-ancestors" => "'self'",

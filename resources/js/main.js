@@ -1,13 +1,20 @@
 import { app } from './core.js';
 import { Stratox } from '../../node_modules/stratox/src/Stratox.js';
-import { StratoxDom as $ } from '../../node_modules/stratox/src/StratoxDom.js';
+import { StratoxTemplate } from '../../node_modules/stratox/src/StratoxTemplate.js';
+import { StratoxDom as $ } from '../../node_modules/stratoxdom/src/StratoxDom.js';
 import { modalComponent } from '../views/jviews/modal.js';
 
 app.init({
     lang: "sv",
     template: {
         cache: false,
-        directory: "../../../resources/views/jviews/"
+        directory: "../../../resources/views/jviews/",
+        handlers: {
+            fields: StratoxTemplate, // Not required (se bellow)
+            helper: function() {
+                return $;
+            }
+        }
     },
     phrases: {
         0: "An unexpected error has occurred",

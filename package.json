@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "stratox": "^1.4.5"
+    "stratox": "^2.0.0",
+    "stratoxdom": "^1.0.0"
   }
 }

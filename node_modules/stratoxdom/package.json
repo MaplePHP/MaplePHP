@@ -1,0 +1,19 @@
+{
+  "name": "stratoxdom",
+  "version": "1.0.0",
+  "description": "A DOM traversal engine",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "traversal",
+    "DOM",
+    "agnostic"
+  ],
+  "author": "Daniel Ronkainen",
+  "license": "Apache-2.0"
+}

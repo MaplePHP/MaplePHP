@@ -1,4 +1,4 @@
-import { StratoxDom as $ } from '../../node_modules/stratox/src/StratoxDom.js';
+import { StratoxDom as $ } from '../../node_modules/stratoxdom/src/StratoxDom.js';
 import { Stratox } from '../../node_modules/stratox/src/Stratox.js';
 
 export const app = {
