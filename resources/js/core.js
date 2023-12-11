@@ -246,6 +246,10 @@ export const app = {
                 break;
             }
         }
+        
+        if(app.getView('modal') && parseInt(CONFIG?.closeModal) === 1) {
+            app.getViewData('modal').get("modal-close");
+        }
 
         if (app.config.responder.isReady) {
             app.config.responder.update(CONFIG);

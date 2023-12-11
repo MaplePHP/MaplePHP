@@ -14,3 +14,20 @@ return [
         ]
     ]
 ];
+
+/*
+Example:
+
+'lang' => '\MaplePHP\Foundation\Http\Lang',
+
+OR 
+
+'logger' => [
+    "handlers" => [
+        '\MaplePHP\Foundation\Log\StreamLogger' => ["emergency", "alert", "critical"],
+    ],
+    "events" => [
+        '\MaplePHP\Foundation\Mail\PHPMailerTest'
+    ]
+],
+ */
