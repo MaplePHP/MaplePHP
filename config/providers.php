@@ -18,10 +18,14 @@ return [
 /*
 Example:
 
-'lang' => '\MaplePHP\Foundation\Http\Lang',
+// Add to service provider
+'logger' => '\MaplePHP\Foundation\Log\StreamLogger'
 
 OR 
 
+// Add to service provider and event handler
+// Event handler will trigger every time "emergency, alert or critical" is triggered
+// When they are triggerd the event "PHPMailerTest" will be triggered
 'logger' => [
     "handlers" => [
         '\MaplePHP\Foundation\Log\StreamLogger' => ["emergency", "alert", "critical"],
@@ -29,5 +33,5 @@ OR
     "events" => [
         '\MaplePHP\Foundation\Mail\PHPMailerTest'
     ]
-],
+]
  */
