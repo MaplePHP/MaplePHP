@@ -117,6 +117,12 @@ export const app = {
      */
     }, getResponder: function () {
 
+        // Acccess view
+        // app.getView('modal');
+
+        // Access view container
+        // app.getViewData('modal');
+
         // View Builder
         if (typeof CONFIG.views === "object") {
             $.each(CONFIG.views, function (k, o) {
@@ -142,25 +148,9 @@ export const app = {
                 } else {
                     stratoxView.execute();
                 }
-
                 app.data.views[id] = stratoxView;
             });
-        }
-
-        /*
-        // Acccess view
-        // app.getView('modal');
-
-        // Access view container
-        // app.getViewData('modal');
-        
-        setTimeout(function() {
-            if(app.getView('modal')) {
-                console.log(app.getViewData('modal').get("modal-close"));
-            }
-        }, 3000);
-         */
-
+        }      
         
         // Has yoken changed? Then set it in DOM
         if (typeof CONFIG.csrfToken === "string") {
@@ -246,8 +236,9 @@ export const app = {
                 break;
             }
         }
-        
+
         if(app.getView('modal') && parseInt(CONFIG?.closeModal) === 1) {
+            CONFIG.closeModal = 0;
             app.getViewData('modal').get("modal-close");
         }
 

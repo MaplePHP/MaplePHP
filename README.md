@@ -1,4 +1,5 @@
 
+
 # MaplePHP
 **MaplePHP is a layered structure PHP framework** that has been meticulously crafted to provide developers with an intuitive, user-friendly experience that doesn't compromise on performance or scalability. By leveraging a modular architecture with **full PSR support**, the framework allows for easy customization and flexibility, enabling developers to pick and choose the specific components they need to build their applications. Overall, the PHP Fuse framework is an excellent choice for developers looking to build high-quality web applications quickly and efficiently.
 
@@ -36,7 +37,9 @@ Execute the following command and follow the instructions:
 ```
 php cli config install --type=mysql
 ```
-The database is now installed and ready.
+The database is now installed and ready. 
+
+**IF you do not want to use table prefix, you can manually remove "MYSQL_PREFIX" or add a empty string from .env**
 
 ### Install mail
 Execute the following command and follow the instructions. I do recommended using a SMTP but is not required:
