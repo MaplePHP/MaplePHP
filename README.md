@@ -117,7 +117,7 @@ $routes->group(function ($routes) {
 *More comprehensive guide will come on router and middlewares*
 
 ### 3. Add services to provider
-There is a couple of ways to use the **Dependency injector** to get simple automatic connection and access a services in your controllers and service in service, the Dependency injector will resolve it all for you and without creating duplicate instances!
+Utilize the Dependency Injector for seamless and efficient connection and access to services in controllers and services in services, and so on. It effortlessly resolves dependencies, preventing the creation of duplicate instances.
 1. Add them to ”configs/providers.php” services here should be accessible by the whole application.
 ```php
 return [
@@ -151,7 +151,7 @@ return [
 
 */
 ```
-2. Access them directly in your Controller and through your **constructor**. 
+2. Access services directly in your Controller and through your **constructor**. 
 ```php
 public function __construct(Provider $provider, StreamLogger $streamLogger)
 {
@@ -166,7 +166,7 @@ public function __construct(Provider $provider, StreamLogger $streamLogger)
     //var_dump($this->logger()); // Access the logger 
 }
 ```
-*What is great is that if StreamLogger has it own services and does services has their own services and so on, the dependency injector will resolve it all for you, and also without creating duplicate instances!*
+*What is great is that if StreamLogger has it own services and those services has their own services and so on, the dependency injector will resolve it all for you, and also without creating duplicate instances!*
 
 *More comprehensive guide will come on provider, services and event handler*
 
