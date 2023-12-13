@@ -1,9 +1,16 @@
 
 
 
+
 # MaplePHP - Layered structure MVC PHP framework
 
 **MaplePHP is a layered structure MVC PHP framework** that very user-friendly and does not compromise on performance or scalability. By leveraging a modular architecture and with full PSR support, the framework allows for easy customization and flexibility, enabling developers to pick and choose the specific components they need to build their applications.
+
+- [Why Choose MaplePHP?](#why-choose-maplephp)
+- [Installation](#installation)
+- [Quick guide](#quick-guide)
+- [Other installations](#other-installations)
+- [Library guides](#library-guides)
 
 ## Why Choose MaplePHP?
 MaplePHP is designed with a commitment to **independence** and adherence to best practices, implementing **PHP Standards Recommendations (PSR)**. Within the framework, you'll find a variety of excellent libraries, including query, cache, logger, and more. However, we don't impose them on you. Feel free to utilize familiar third-party libraries or extend MaplePHP's functionality with your own. In our philosophy, dependencies should be at your discretion, not dictated by the framework.
@@ -17,7 +24,7 @@ Updates to MaplePHP are delivered through minor and patch versions, ensuring smo
 - **High Performance:** The framework is optimized for speed, providing efficient execution and reduced processing times. 
 - **Full PSR Support:** MaplePHP fully adheres to PHP Standards Recommendations, promoting standardized and interoperable code. 
 - **Modular Architecture:** With a modular structure, developers can easily customize and extend functionality based on project requirements. 
-- **Efficient Library Integration:**MaplePHP libraries seamlessly work with other frameworks as well as within the MaplePHP environment.
+- **Efficient Library Integration:** MaplePHP libraries seamlessly work with other frameworks as well as within the MaplePHP environment.
 - **Service Providers:** MaplePHP offers service providers, streamlining the integration of external services and enhancing application capabilities. 
 - **Multilingual Support:** You can very easily add translations to your project.
 - **Built-in Security Measures:** Built-in protection against common vulnerabilities such as XSS (Cross-Site Scripting), CSRF (Cross-Site Request Forgery), session injection, and MySQL injection. 
@@ -56,13 +63,13 @@ Access your application/site in the browser by navigating to the **"public/"** d
 ## Quick guide
 **Getting started in just 4 steps.** I am working on a more comprehensive guide in gitbook and will publish it as soon as possible.
 
-1. Add controller
-2. Add to router
+1. Adding Controller
+2. Add Controller to router
 3. Add services to provider
 5. Dispatch output
 
 ### 1. Adding controller
-Add a controller file in the Controllers directory or you can just duplicate one of the working examples from "app/Http/Controlles/Examples/". 
+Add a controller file in the Controllers directory or you can just duplicate one of the working examples from "app/Http/Controllers/Examples/". 
 
 ```php
 <?php
@@ -88,8 +95,8 @@ class Pages extends BaseController
 ```
 *More comprehensive guide will come on controllers*
 
-### 2 add contoller to router
-Add you controller to router **(app/Http/Routes/web.php)** by specifing a method type (GET, POST, PUT, DELETE), full namespace path to your class and specify method if you want, else maple will try to access the __invoke method.
+### 2. Add Controller to router
+Add you Controller to router **(app/Http/Routes/web.php)** by specifing a method type (GET, POST, PUT, DELETE), full namespace path to your class and specify method if you want, else maple will try to access the __invoke method.
 ```php
 $routes->group(function ($routes) {
     // Will handle all HTTP request errors
@@ -109,8 +116,8 @@ $routes->group(function ($routes) {
 ```
 *More comprehensive guide will come on router and middlewares*
 
-### 3 add services to provider
-There is a couple of ways to use the **Dependecy injector** to get simple automatic connection and access a services in your controllers and service in service, the Dependecy injector will resolve it all for you and without creating duplicate instances!
+### 3. Add services to provider
+There is a couple of ways to use the **Dependency injector** to get simple automatic connection and access a services in your controllers and service in service, the Dependency injector will resolve it all for you and without creating duplicate instances!
 1. Add them to ”configs/providers.php” services here should be accessible by the whole application.
 ```php
 return [
@@ -144,7 +151,7 @@ return [
 
 */
 ```
-2. Access them directly in your Controller and through your **constructer**. 
+2. Access them directly in your Controller and through your **constructor**. 
 ```php
 public function __construct(Provider $provider, StreamLogger $streamLogger)
 {
@@ -163,7 +170,7 @@ public function __construct(Provider $provider, StreamLogger $streamLogger)
 
 *More comprehensive guide will come on provider, services and event handler*
 
-### 4 Dispatch output
+### 4. Dispatch output
 Use built in template library or add your own either way output the content with PSR ResponseInterface.
 ```php
 <?php
