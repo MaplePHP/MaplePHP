@@ -234,7 +234,7 @@ php cli config install --type=mail
 Mail has now been installed.
 
 ### Install Auth and login form
-*Requires at least MaplePHP framework 1.0.4*
+
 #### Install the database:
 In the correct order!
 ```
