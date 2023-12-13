@@ -11,8 +11,6 @@
 <body>
     <?php echo $this->partial("navigation")->get(); ?>
     <main>
-        <div id="ingress"></div>
-        <div id="ingress2"></div>
         <?php echo $this->view()->get($args); ?>
     </main>
     <footer></footer>
@@ -20,7 +18,6 @@
     <?php if ($obj->container->has("foot")) {
         echo $obj->container->get("foot")->execute();
     } ?>
-    
     <script nonce="<?php echo getenv("NONCE"); ?>" type="module" src="<?php echo $obj->container->get("url")->getJs("main.js", (bool)(getenv("APP_ENV") === "production")); ?>"></script>
 </body>
 </html>
