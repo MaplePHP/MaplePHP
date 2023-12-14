@@ -2,6 +2,7 @@
 
 
 
+
 # MaplePHP - Layered structure MVC PHP framework
 
 **MaplePHP is a layered structure MVC PHP framework** that very user-friendly and does not compromise on performance or scalability. By leveraging a modular architecture and with full PSR support, the framework allows for easy customization and flexibility, enabling developers to pick and choose the specific components they need to build their applications.
@@ -38,10 +39,18 @@ Updates to MaplePHP are delivered through minor and patch versions, ensuring smo
 In recent developments, MaplePHP has reached a significant milestone with the release of **version 2.0.0+**. This signifies the conclusion of its beta phase, marking the completion of every structural change. While substantial progress has been achieved, there is still much on the horizon. Ongoing tasks include **rigorous quality testing **and** comprehensive documentation updates**, all aimed at ensuring an even more user-friendly experience for developers.
 
 ## Installation
-The primary installation.
+The primary installation. Install the framework:
 ```
 composer create-project maplephp/maplephp myApp
 ```
+*MaplePHP comes with some pre-installed npm packages, including Stratox.js, a template engine. However, it is recommended to execute the command below to ensure you have the latest package and that every new JavaScript component is installed:*
+```
+npm install
+```
+This will install [Stratox.js](https://www.npmjs.com/package/stratox) a JavaScript template engine tailored for MaplePHP.
+
+It is **not required**, and you can, for example, manually replace all content in "resources/js/main.js" and modify "package.json" with your own libraries that you are comfortable with. However, I have included it so that all the examples work.
+
 ## Updating MaplePHP
 Starting from version 2.0.0 and beyond, updating MaplePHP to the latest version is as simple as running the command below.
 ```
