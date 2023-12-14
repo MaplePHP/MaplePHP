@@ -29,9 +29,10 @@ return [
         "X-XSS-Protection" => "1",
         "X-Content-Type-Options" => "nosniff",
         "Strict-Transport-Security" => "max-age=31536000; includeSubDomains",
+        /*
         "Content-Security-Policy" => [
             "default-src" => "'self'",
-            "script-src" => "'nonce-" . $this->getenv("NONCE") . "' 'unsafe-inline'",
+            "script-src" => "'nonce-" . $this->getenv("NONCE") . "'",
             "script-src-elem" => "'self' 'unsafe-inline'",
             "style-src" => "'self' 'unsafe-inline'",
             "object-src" => "'self'",
@@ -40,6 +41,7 @@ return [
             "form-action" => "'self'",
             "base-uri" => "'self'"
         ]
+         */
     ],
     'mail' => [
         'host' => '',

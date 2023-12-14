@@ -1,10 +1,11 @@
-import { app } from './core.js';
+import { Responder } from '../../node_modules/frontresponder/src/Responder.js';
 import { Stratox } from '../../node_modules/stratox/src/Stratox.js';
 import { StratoxTemplate } from '../../node_modules/stratox/src/StratoxTemplate.js';
 import { StratoxDom as $ } from '../../node_modules/stratoxdom/src/StratoxDom.js';
-import { modalComponent } from '../views/jviews/modal.js';
+import { StratoxModal } from '../../node_modules/stratoxcomponents/src/StratoxModal.js';
+import { StratoxForm } from '../../node_modules/stratoxcomponents/src/StratoxForm.js';
 
-app.init({
+Responder.init({
     lang: "sv",
     template: {
         cache: false,
@@ -29,12 +30,21 @@ app.init({
     },
     responder: {
         ready: function (data) {
-            Stratox.prepareView("modal", modalComponent);
+            Stratox.prepareView("modal", StratoxModal);
+            Stratox.prepareView("form", StratoxForm);
+            
+            // The documnet is ready
+            // Your code here
+
         },
         update: function (data) {
-            //console.log("update", data);
+            console.log("Responder update: ", data);
+
+            // There has been a responder update
+            // Your code here
+
         }
     }
 });
 
-$(document).ready(app.setup);
+$(document).ready(Responder.setup);

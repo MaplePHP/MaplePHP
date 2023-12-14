@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "stratox": "^2.0.0",
-    "stratoxdom": "^1.0.0"
+    "frontresponder": "^1.0.0"
   }
 }

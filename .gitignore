@@ -1,13 +1,13 @@
 vendor/
 public/js/*
+node_modules/.package-lock.json
+storage/logs/*.log
+storage/caches/*.cache
 ._*
 .DS_Store
 .sass-cache
 .env
 .php-cs-fixer.cache
 .smbdelete*
-node_modules/.package-lock.json
-storage/logs/*.log
-storage/caches/*.cache
 composer.lock
 package-lock.json
