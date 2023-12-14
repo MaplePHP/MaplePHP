@@ -50,7 +50,7 @@ composer create-project maplephp/maplephp myApp
 ```
 npm install
 ```
-This will install [Stratox.js](https://www.npmjs.com/package/stratox) a JavaScript template engine tailored for MaplePHP.
+This will install [Stratox.js](https://www.npmjs.com/package/stratox) a JavaScript template engine tailored for MaplePHP. [Read the documentation here](https://wazabii.se/stratoxjs/).
 
 It is **not required**, and you can, for example, manually replace all content in "resources/js/main.js" and modify "package.json" with your own libraries that you are comfortable with. However, I have included it so that all the examples work.
 
