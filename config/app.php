@@ -17,7 +17,7 @@ return [
         'public_dir' => 'public/',
         'version' => '4.0.0',
         'bundle' => $this->getenv("NONCE"),
-        'maintainer' => 'Daniel Ronkainen <daniel@creativearmy.se>'
+        'maintainer' => 'John Doe <john.doe@gmail.com>'
     ],
     'session' => [
         "time" => 360, // minutes
