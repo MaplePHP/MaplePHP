@@ -39,7 +39,7 @@ class Pages extends BaseController
      */
     public function profile(ResponseInterface $response, RequestInterface $request)
     {
-        $this->view()->setPartial("breadcrumb", [
+        $this->view()->setPartial("main.ingress", [
             "tagline" => getenv("APP_NAME"),
             "name" => "Welcome " . $this->user()->firstname,
             "content" => "Get ready to build you first application."

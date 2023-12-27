@@ -9,12 +9,11 @@ use Http\Controllers\BaseController;
 
 class Pages extends BaseController
 {
-    protected $url;
-    protected $responder;
-    protected $users;
+    protected $provider;
 
     public function __construct(Provider $provider)
     {
+        $this->provider = $provider;
     }
 
     /**
@@ -31,11 +30,25 @@ class Pages extends BaseController
         //$this->head()->getElement("title")->setValue("Welcome to my awesome app");
         //$this->head()->getElement("description")->attr("content", "Some text about my awesome app");
 
-        $this->view()->setPartial("breadcrumb", [
-            "tagline" => getenv("APP_NAME"),
+
+        $this->provider->view()->setPartial("main.ingress", [
+            "tagline" => "Ingress view partial",
             "name" => "Welcome to MaplePHP",
             "content" => "Get ready to build you first application."
         ]);
+
+        $this->provider->view()->setPartial("main.text", [
+            "tagline" => "Text view partial A",
+            "name" => "Lorem ipsum dolor",
+            "content" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id sapien dui. Nullam gravida bibendum finibus. Pellentesque a elementum augue. Aliquam malesuada et neque ac varius. Nam id eros eros. Ut ut mattis ex. Aliquam molestie tortor quis ultrices euismod. Quisque blandit pellentesque purus, in posuere ex mollis ac."
+        ]);
+
+        $this->provider->view()->setPartial("main.text.textB", [
+            "tagline" => "Text view partial B",
+            "name" => "Lorem ipsum dolor",
+            "content" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id sapien dui. Nullam gravida bibendum finibus. Pellentesque a elementum augue. Aliquam malesuada et neque ac varius. Nam id eros eros. Ut ut mattis ex. Aliquam molestie tortor quis ultrices euismod. Quisque blandit pellentesque purus, in posuere ex mollis ac."
+        ]);
+
 
         // Auto clear cache on update and on a future pulish date!
         // withLastModified will only work with the middleware "LastModifiedHandler"
@@ -54,7 +67,14 @@ class Pages extends BaseController
      */
     public function about(ResponseInterface $response, RequestInterface $request): ResponseInterface
     {
-        $this->view()->setPartial("breadcrumb", [
+
+        // $this->view() is the same as $this->provider when extending to the BaseController!;
+        $this->view()->setPartial("main.ingress", [
+            "tagline" => "Layered structure MVC framework",
+            "name" => "MaplePHP"
+        ]);
+
+        $this->view()->setPartial("main.text", [
             "tagline" => "Layered structure MVC framework",
             "name" => "MaplePHP",
             "content" => "MaplePHP is a layered structure PHP framework that has been meticulously crafted to " .
