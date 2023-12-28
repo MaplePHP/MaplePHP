@@ -32,9 +32,8 @@ $routes->group(function ($routes) {
     
     // Open up a SESSION
     $routes->group(function ($routes) {
-
         // With session now open we can handle the Login form and it's requests
-
+        
         // Public login area
         $routes->group(function ($routes) {
 
@@ -47,20 +46,13 @@ $routes->group(function ($routes) {
             // Login request
             $routes->post("/{page:login}", ['Http\Controllers\Private\Login', "login"]);
 
-            // Forgot
+            // Forgot password
             $routes->get("/{page:login}/{type:forgot}", ['Http\Controllers\Private\Login', 'forgotPasswordForm']);
             $routes->post("/{page:login}/{type:forgot}", ['Http\Controllers\Private\Login', 'forgotPasswordPost']);
 
             // Change password
-            $routes->get("/{page:login}/{type:reset}/{token:[^/]+}", [
-                'Http\Controllers\Private\Login',
-                "resetPasswordForm"
-            ]);
-
-            $routes->post("/{page:login}/{type:reset}/{token:[^/]+}", [
-                'Http\Controllers\Private\Login',
-                "resetPasswordPost"
-            ]);
+            $routes->get("/{page:login}/{type:reset}/{token:[^/]+}", ['Http\Controllers\Private\Login', "resetPasswordForm"]);
+            $routes->post("/{page:login}/{type:reset}/{token:[^/]+}", ['Http\Controllers\Private\Login', "resetPasswordPost"]);
 
         }, [
             [MaplePHP\Foundation\Auth\Middleware\LoggedIn::class, "publicZone"],
@@ -79,6 +71,7 @@ $routes->group(function ($routes) {
         }, [
             [MaplePHP\Foundation\Auth\Middleware\LoggedIn::class, "privateZone"]
         ]);
+
     }, [
         MaplePHP\Foundation\Auth\Middleware\SessionStart::class
     ]);
@@ -86,5 +79,6 @@ $routes->group(function ($routes) {
 }, [
     MaplePHP\Foundation\Cache\Middleware\LastModified::class,
     MaplePHP\Foundation\Nav\Middleware\Navigation::class,
-    MaplePHP\Foundation\Dom\Middleware\Meta::class
+    MaplePHP\Foundation\Dom\Middleware\Meta::class,
+    [Http\Middlewares\Document::class, ["head", "footer"]],
 ]);

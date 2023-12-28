@@ -13,11 +13,17 @@ return [
         'debug' => 1,
         'charset' => 'UTF-8',
         'ssl' => 1,
-        'lang' => 'sv',
+        'lang' => 'en',
         'public_dir' => 'public/',
         'version' => '4.0.0',
         'bundle' => $this->getenv("NONCE"),
         'maintainer' => 'John Doe <john.doe@gmail.com>'
+    ],
+    'configs' => [
+        'database',
+        'navigation',
+        'providers',
+        'routers'
     ],
     'session' => [
         "time" => 360, // minutes
