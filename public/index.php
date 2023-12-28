@@ -1,7 +1,4 @@
 <?php 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 use MaplePHP\Foundation\Kernel\Kernel;
 $dir = realpath(dirname(__FILE__) . '/..') . '/';
 // This will change (will tho only affect commits)
