@@ -6,14 +6,17 @@ use MaplePHP\Handler\Interfaces\MiddlewareInterface;
 use MaplePHP\Http\Interfaces\ResponseInterface;
 use MaplePHP\Http\Interfaces\RequestInterface;
 use MaplePHP\Foundation\Http\Provider;
+use MaplePHP\Foundation\Nav\Navbar;
 
 class Document implements MiddlewareInterface
 {
     private $provider;
+    private $nav;
 
-    public function __construct(Provider $provider)
+    public function __construct(Provider $provider, Navbar $nav)
     {
         $this->provider = $provider;
+        $this->nav = $nav;
     }
 
     /**
@@ -41,6 +44,21 @@ class Document implements MiddlewareInterface
     }
 
     /**
+     * Add head to the document
+     * @param  ResponseInterface $response
+     * @param  RequestInterface  $request
+     * @return ResponseInterface|void
+     */
+    public function navigation(ResponseInterface $response, RequestInterface $request)
+    {
+        // Partial in document director
+        // The exclamation character will disable thrown error, if you remove the partial template file.
+        $this->provider->view()->setPartial("navigation.!document/navigation", [
+            "nav" => $this->nav->get()
+        ]);
+    }
+
+    /**
      * Add footer to the document
      * @param  ResponseInterface $response
      * @param  RequestInterface  $request
@@ -50,7 +68,9 @@ class Document implements MiddlewareInterface
     {
         // Partial in document director
         // The exclamation character will disable thrown error, if you remove the partial template file.
-        $this->provider->view()->setPartial("footer.!document/footer");
+        $this->provider->view()->setPartial("footer.!document/footer", [
+            "nav" => $this->nav->get()
+        ]);
 
     }
 

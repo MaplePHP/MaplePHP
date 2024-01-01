@@ -17,25 +17,26 @@
  */
 
 $routes->group(function ($routes) {
+
     // Will handle all HTTP request errors
     $routes->map("*", '[/{any:.*}]', ['Http\Controllers\HttpRequestError', "handleError"]);
 
     // Regular static example pages
     $routes->get("/", ['Http\Controllers\Examples\Pages', "start"]);
     $routes->get("/{page:about}", ['Http\Controllers\Examples\Pages', "about"]);
+    $routes->get("/{page:policy}", ['Http\Controllers\Examples\Pages', "policy"]);
 
     // Contact page with form
     $routes->get("/{page:contact}", ['Http\Controllers\Examples\ExampleForm', "contactFrom"]);
     $routes->get("/{page:contact}/{model:modal}", ['Http\Controllers\Examples\ExampleForm', "contactFormModal"]);
     $routes->post("/{page:contact}", ['Http\Controllers\Examples\ExampleForm', "post"]);
     
-    
     // Open up a SESSION
     $routes->group(function ($routes) {
         // With session now open we can handle the Login form and it's requests
         
-        // Public login area
         $routes->group(function ($routes) {
+            // Public login area
 
             // Regular page with form
             $routes->get("/{page:login}", ['Http\Controllers\Private\Login', "form"]);
@@ -58,15 +59,14 @@ $routes->group(function ($routes) {
             [MaplePHP\Foundation\Auth\Middleware\LoggedIn::class, "publicZone"],
         ]);
 
-
-        // Private area (The user is logged in)
         $routes->group(function ($routes) {
-            // Logout the user
-            $routes->get("/{page:logout}", ['Http\Controllers\Private\Pages', "logout"]);
+            // Private area (The user is logged in)
 
             // Profile page
             $routes->get("/{profile:profile}", ['Http\Controllers\Private\Pages', "profile"]);
 
+            // Logout the user
+            $routes->get("/{page:logout}", ['Http\Controllers\Private\Pages', "logout"]);
 
         }, [
             [MaplePHP\Foundation\Auth\Middleware\LoggedIn::class, "privateZone"]
@@ -77,8 +77,7 @@ $routes->group(function ($routes) {
     ]);
 
 }, [
+    [Http\Middlewares\Document::class, ["after" => ["head", "navigation", "footer"]]],
     MaplePHP\Foundation\Cache\Middleware\LastModified::class,
-    MaplePHP\Foundation\Nav\Middleware\Navigation::class,
     MaplePHP\Foundation\Dom\Middleware\Meta::class,
-    [Http\Middlewares\Document::class, ["head", "footer"]],
 ]);

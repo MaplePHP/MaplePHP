@@ -9,6 +9,7 @@ use Http\Controllers\BaseController;
 
 class Pages extends BaseController
 {
+
     protected $provider;
 
     public function __construct(Provider $provider)
@@ -24,13 +25,6 @@ class Pages extends BaseController
      */
     public function start(ResponseInterface $response, RequestInterface $request): ResponseInterface
     {
-        // Overwrite default meta
-        // Meta is propagated by Models/Navbar and then meta it self in the middleware "DomManipulation" where
-        // some standard DOM element is preset.
-        //$this->head()->getElement("title")->setValue("Welcome to my awesome app");
-        //$this->head()->getElement("description")->attr("content", "Some text about my awesome app");
-
-
         $this->provider->view()->setPartial("main.ingress", [
             "tagline" => "Ingress view partial",
             "name" => "Welcome to MaplePHP",
@@ -68,6 +62,10 @@ class Pages extends BaseController
     public function about(ResponseInterface $response, RequestInterface $request): ResponseInterface
     {
 
+        // Overwrite the default meta value
+        //$this->head()->getElement("title")->setValue("Welcome to my awesome app");
+        //$this->head()->getElement("description")->attr("content", "Some text about my awesome app");
+
         // $this->view() is the same as $this->provider when extending to the BaseController!;
         $this->view()->setPartial("main.ingress", [
             "tagline" => "Layered structure MVC framework",
@@ -87,6 +85,28 @@ class Pages extends BaseController
         // Browser cache content up to an hour
         // This will work even with a session open so be careful
         // return $response->setCache($this->date()->getTimestamp(), 3600);
+        return $response;
+    }
+
+
+    /**
+     * The about page (see router)
+     * @param  ResponseInterface $response PSR-7 Response
+     * @param  RequestInterface  $request  PSR-7 Request
+     * @return ResponseInterface
+     */
+    public function policy(ResponseInterface $response, RequestInterface $request): ResponseInterface
+    {
+        $this->view()->setPartial("main.text.integrity", [
+            "name" => "Integrity policy",
+            "content" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id sapien dui. Nullam gravida bibendum finibus. Pellentesque a elementum augue. Aliquam malesuada et neque ac varius. Nam id eros eros. Ut ut mattis ex. Aliquam molestie tortor quis ultrices euismod. Quisque blandit pellentesque purus, in posuere ex mollis ac."
+        ]);
+
+        $this->view()->setPartial("main.text.cookie", [
+            "name" => "Cookies",
+            "content" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id sapien dui. Nullam gravida bibendum finibus. Pellentesque a elementum augue. Aliquam malesuada et neque ac varius. Nam id eros eros. Ut ut mattis ex. Aliquam molestie tortor quis ultrices euismod. Quisque blandit pellentesque purus, in posuere ex mollis ac."
+        ]);
+        
         return $response;
     }
 

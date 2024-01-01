@@ -1,5 +1,4 @@
 
-
 <div class="article border-bottom">
     <section class="wrapper max-w-screen-md">
         <?php echo $obj->tagline("Dom")->create("h6")->attr("class", "title"); ?>

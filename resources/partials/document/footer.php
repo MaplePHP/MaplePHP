@@ -1,5 +1,8 @@
 
-<footer id="footer" class="p-15 align-center legend" role="contentinfo">
+<footer id="footer" class="p-30 align-center legend" role="contentinfo">
+    <aside class="mb-10">
+        <?php if($obj->nav) echo $obj->nav->select("footer")->get("nav"); ?>
+    </aside>
     <?php echo $this->provider()->date()->format("Y"); ?> <?php echo $this->provider()->env("APP_NAME"); ?>
 </footer>
 <div id="loading"></div>

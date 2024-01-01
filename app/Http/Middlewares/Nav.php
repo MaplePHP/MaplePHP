@@ -39,7 +39,7 @@ class Nav extends Navigation implements MiddlewareInterface
         // You can use this middelware to create an dynamic navigation
         // The id is not required, but will create it´s own id with increment, starting from 1 if not filled in. 
         // The id is used to select parent!
-        $this->nav->add([
+        $this->nav->add("main", [
             "id" => 1,
             "name" => "Start",
             "slug" => "",
@@ -47,7 +47,7 @@ class Nav extends Navigation implements MiddlewareInterface
             "title" => "Meta title start",
             "description" => "Meta description start"
             
-        ])->add([
+        ])->add("main", [
             "id" => 2,
             "name" => "Contact",
             "slug" => "contact",
@@ -68,6 +68,7 @@ class Nav extends Navigation implements MiddlewareInterface
      */
     public function after(ResponseInterface $response, RequestInterface $request)
     {
+
     }
 
 
