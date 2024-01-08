@@ -4,9 +4,11 @@ import { StratoxTemplate } from '../../node_modules/stratox/src/StratoxTemplate.
 import { StratoxDom as $ } from '../../node_modules/stratoxdom/src/StratoxDom.js';
 import { StratoxModal } from '../../node_modules/stratoxcomponents/src/StratoxModal.js';
 import { StratoxForm } from '../../node_modules/stratoxcomponents/src/StratoxForm.js';
+import { StratoxTable } from '../../node_modules/stratoxcomponents/src/StratoxTable.js';
+//import { ingressComponent } from '../views/jviews/ingress.js';
 
 Responder.init({
-    lang: "sv",
+    lang: "en",
     template: {
         cache: false,
         directory: "../../../resources/views/jviews/",
@@ -29,20 +31,20 @@ Responder.init({
         503: "503 Service Unavailable"
     },
     responder: {
+        setup: function(config) {
+            Stratox.setComponent("modal", StratoxModal);
+            Stratox.setComponent("form", StratoxForm);
+            Stratox.setComponent("table", StratoxTable);
+            //Stratox.setComponent("ingress", ingressComponent);
+        },
         ready: function (data) {
-            Stratox.prepareView("modal", StratoxModal);
-            Stratox.prepareView("form", StratoxForm);
-            
             // The documnet is ready
             // Your code here
-
         },
         update: function (data) {
             console.log("Responder update: ", data);
-
             // There has been a responder update
             // Your code here
-
         }
     }
 });

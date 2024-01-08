@@ -25,6 +25,7 @@ class Pages extends BaseController
      */
     public function start(ResponseInterface $response, RequestInterface $request): ResponseInterface
     {
+
         $this->provider->view()->setPartial("main.ingress", [
             "tagline" => "Ingress view partial",
             "name" => "Welcome to MaplePHP",
@@ -42,7 +43,6 @@ class Pages extends BaseController
             "name" => "Lorem ipsum dolor",
             "content" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id sapien dui. Nullam gravida bibendum finibus. Pellentesque a elementum augue. Aliquam malesuada et neque ac varius. Nam id eros eros. Ut ut mattis ex. Aliquam molestie tortor quis ultrices euismod. Quisque blandit pellentesque purus, in posuere ex mollis ac."
         ]);
-
 
         // Auto clear cache on update and on a future pulish date!
         // withLastModified will only work with the middleware "LastModifiedHandler"

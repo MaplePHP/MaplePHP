@@ -29,13 +29,12 @@ class ExampleForm extends BaseController
     public function contactFrom(ResponseInterface $response, RequestInterface $request)
     {
         $this->form->build();
-
         $url = $this->url()->withType(["page"])->add(["modal"])->getUrl();
         $this->view()->setPartial("form", [
             "tagline" => getenv("APP_NAME"),
             "name" => "Contact us",
             "content" => "You can use regular form like bellow or place form in a modal: " .
-            "<a class=\"domer-get-btn\" href=\"#\" data-href=\"" . $url . "\">Click here</a>",
+            "<a class=\"maple-get-btn\" href=\"#\" data-href=\"" . $url . "\">Click here</a>",
             "form" => [
                 "method" => "post",
                 "action" => $this->url()->getUrl(),
@@ -104,7 +103,8 @@ class ExampleForm extends BaseController
      */
     public function post(ResponseInterface $response, RequestInterface $request): object
     {
-        if ($_requests = $this->validate->validate($this->form, $request->getParsedBody())) {
+        if ($requests = $this->validate->validate($this->form, $request->getParsedBody())) {
+            // The $requests variable will contain all "expected" form fields post values
             $this->responder()->message("Completed!");
         }
         // Responder will pass response to frontend and Stratox.js

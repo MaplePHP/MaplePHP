@@ -39,7 +39,7 @@ class Login extends BaseController
         $this->view()->setPartial("form", [
             "name" => $this->local("auth")->get("signIn", "Sign in"),
             "content" => "You can use regular form like bellow or place form in a modal: " .
-            "<a class=\"domer-get-btn\" href=\"#\" data-href=\"" . $url . "\">Click here</a>",
+            "<a class=\"maple-get-btn\" href=\"#\" data-href=\"" . $url . "\">Click here</a>",
             "form" => [
                 "method" => "post",
                 "action" => $this->url()->reset()->add(["login"])->getUrl(),
