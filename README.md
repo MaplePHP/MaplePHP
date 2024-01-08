@@ -6,12 +6,6 @@
 ## Visit the full guide
 [Click here for full guide](https://maplephp.wazabii.se/)
 
-- [Why Choose MaplePHP?](#why-choose-maplephp)
-- [Installation](#installation)
-- [Quick guide](#quick-guide)
-- [Other installations](#other-installations)
-- [Library guides](#library-guides)
-
 ## Why Choose MaplePHP?
 MaplePHP is designed with a commitment to **independence** and adherence to best practices, implementing **PHP Standards Recommendations (PSR)**. Within the framework, you'll find a variety of excellent libraries, including query, cache, logger, and more. However, we don't impose them on you. Feel free to utilize familiar third-party libraries or extend MaplePHP's functionality with your own. In our philosophy, dependencies should be at your discretion, not dictated by the framework.
 
