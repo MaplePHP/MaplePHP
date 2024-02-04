@@ -1,10 +1,22 @@
 
+
 # MaplePHP - Layered structure MVC PHP framework
 
 **MaplePHP is a layered structure MVC PHP framework** that very user-friendly and does not compromise on performance or scalability. By leveraging a modular architecture and with full PSR support, the framework allows for easy customization and flexibility, enabling developers to pick and choose the specific components they need to build their applications.
 
-## Visit the full guide
-[Click here for full guide](https://maplephp.wazabii.se/)
+## Documentation
+**[You can find the full MaplePHP documentation here](https://maplephp.wazabii.se/)**
+
+#### The documentation is divided into several sections:
+-   [Why MaplePHP?](https://maplephp.wazabii.se/)
+-   [Get started](https://maplephp.wazabii.se/guide/get-started)
+-   [Installation](https://maplephp.wazabii.se/guide/installation)
+-   [Service Provider](https://maplephp.wazabii.se/guide/service-provider)
+-   [Dependency injector](https://maplephp.wazabii.se/guide/dependency-injector)
+-   [Controller](https://maplephp.wazabii.se/guide/controller)
+-   [Middlewares](https://maplephp.wazabii.se/guide/middlewares)
+-   [Routers](https://maplephp.wazabii.se/guide/routers)
+-   [And much more...](https://maplephp.wazabii.se/)**
 
 ## Why Choose MaplePHP?
 MaplePHP is designed with a commitment to **independence** and adherence to best practices, implementing **PHP Standards Recommendations (PSR)**. Within the framework, you'll find a variety of excellent libraries, including query, cache, logger, and more. However, we don't impose them on you. Feel free to utilize familiar third-party libraries or extend MaplePHP's functionality with your own. In our philosophy, dependencies should be at your discretion, not dictated by the framework.
