@@ -16,7 +16,7 @@
 -   [Controller](https://maplephp.wazabii.se/guide/controller)
 -   [Middlewares](https://maplephp.wazabii.se/guide/middlewares)
 -   [Routers](https://maplephp.wazabii.se/guide/routers)
--   [And much more...](https://maplephp.wazabii.se/)**
+-   [And much more...](https://maplephp.wazabii.se/)
 
 ## Why Choose MaplePHP?
 MaplePHP is designed with a commitment to **independence** and adherence to best practices, implementing **PHP Standards Recommendations (PSR)**. Within the framework, you'll find a variety of excellent libraries, including query, cache, logger, and more. However, we don't impose them on you. Feel free to utilize familiar third-party libraries or extend MaplePHP's functionality with your own. In our philosophy, dependencies should be at your discretion, not dictated by the framework.
