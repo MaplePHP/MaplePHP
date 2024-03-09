@@ -9,3 +9,8 @@ if (is_file("{$dir}vendor/maplephp/foundation/autoload.php")) {
 require_once($autoload);
 $kernel = new Kernel($dir);
 $kernel->run();
+
+// You can utilize a different path technique by passing it to the kernel run method
+// Example:
+//$param = $kernel->getRequest()->getQueryParams();
+//$kernel->run($param['page'] ?? "");

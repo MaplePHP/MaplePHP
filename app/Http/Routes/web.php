@@ -31,53 +31,49 @@ $routes->group(function ($routes) {
     $routes->get("/{page:contact}/{model:modal}", ['Http\Controllers\Examples\ExampleForm', "contactFormModal"]);
     $routes->post("/{page:contact}", ['Http\Controllers\Examples\ExampleForm', "post"]);
     
-    // Open up a SESSION
+
     $routes->group(function ($routes) {
-        // With session now open we can handle the Login form and it's requests
-        
-        $routes->group(function ($routes) {
-            // Public login area
+        // Public login area
 
-            // Regular page with form
-            $routes->get("/{page:login}", ['Http\Controllers\Private\Login', "form"]);
+        // Regular page with form
+        $routes->get("/{page:login}", ['Http\Controllers\Private\Login', "form"]);
 
-            // Open form in a modal with ajax call
-            $routes->get("/{page:login}/{model:model}", ['Http\Controllers\Private\Login', "formModel"]);
+        // Open form in a modal with ajax call
+        $routes->get("/{page:login}/{model:model}", ['Http\Controllers\Private\Login', "formModel"]);
 
-            // Login request
-            $routes->post("/{page:login}", ['Http\Controllers\Private\Login', "login"]);
+        // Login request
+        $routes->post("/{page:login}", ['Http\Controllers\Private\Login', "login"]);
 
-            // Forgot password
-            $routes->get("/{page:login}/{type:forgot}", ['Http\Controllers\Private\Login', 'forgotPasswordForm']);
-            $routes->post("/{page:login}/{type:forgot}", ['Http\Controllers\Private\Login', 'forgotPasswordPost']);
+        // Forgot password
+        $routes->get("/{page:login}/{type:forgot}", ['Http\Controllers\Private\Login', 'forgotPasswordForm']);
+        $routes->post("/{page:login}/{type:forgot}", ['Http\Controllers\Private\Login', 'forgotPasswordPost']);
 
-            // Change password
-            $routes->get("/{page:login}/{type:reset}/{token:[^/]+}", ['Http\Controllers\Private\Login', "resetPasswordForm"]);
-            $routes->post("/{page:login}/{type:reset}/{token:[^/]+}", ['Http\Controllers\Private\Login', "resetPasswordPost"]);
-
-        }, [
-            [MaplePHP\Foundation\Auth\Middleware\LoggedIn::class, "publicZone"],
-        ]);
-
-        $routes->group(function ($routes) {
-            // Private area (The user is logged in)
-
-            // Profile page
-            $routes->get("/{profile:profile}", ['Http\Controllers\Private\Pages', "profile"]);
-
-            // Logout the user
-            $routes->get("/{page:logout}", ['Http\Controllers\Private\Pages', "logout"]);
-
-        }, [
-            [MaplePHP\Foundation\Auth\Middleware\LoggedIn::class, "privateZone"]
-        ]);
+        // Change password
+        $routes->get("/{page:login}/{type:reset}/{token:[^/]+}", ['Http\Controllers\Private\Login', "resetPasswordForm"]);
+        $routes->post("/{page:login}/{type:reset}/{token:[^/]+}", ['Http\Controllers\Private\Login', "resetPasswordPost"]);
 
     }, [
-        MaplePHP\Foundation\Auth\Middleware\SessionStart::class
+        [MaplePHP\Foundation\Auth\Middleware\LoggedIn::class, "publicZone"],
     ]);
+
+    $routes->group(function ($routes) {
+        // Private area (The user is logged in)
+
+        // Profile page
+        $routes->get("/{profile:profile}", ['Http\Controllers\Private\Pages', "profile"]);
+
+        // Logout the user
+        $routes->get("/{page:logout}", ['Http\Controllers\Private\Pages', "logout"]);
+
+    }, [
+        [MaplePHP\Foundation\Auth\Middleware\LoggedIn::class, "privateZone"]
+    ]);
+
+   
 
 }, [
     [Http\Middlewares\Document::class, ["after" => ["head", "navigation", "footer"]]],
-    MaplePHP\Foundation\Cache\Middleware\LastModified::class,
+    //MaplePHP\Foundation\Cache\Middleware\LastModified::class,
     MaplePHP\Foundation\Dom\Middleware\Meta::class,
+    MaplePHP\Foundation\Auth\Middleware\SessionStart::class
 ]);
