@@ -25,6 +25,13 @@ return [
             "type" => "masked",
             "prompt" => "Password"
         ],
+        'port' => [
+            "prompt" => "Port",
+            "default" => "3306",
+            "validate" => [
+                "int" => []
+            ]
+        ],
         'prefix' => 'maple_',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci'
