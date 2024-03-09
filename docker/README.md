@@ -5,10 +5,10 @@ MaplePHP Docker provides a fully functional environment including a web server, 
 ## Installation Steps
 
 ### 1. Prepare Docker Files
-Move the `Dockerfile` and `docker-compose.yml` files into the MaplePHP root directory for integration.
+Move the `Dockerfile` and `docker-compose.yml` files to the desired location for the web server installation.
 
 ### 2. Build and Launch
-In your terminal, navigate to the MaplePHP root directory where the Docker files were placed. Execute the command below to build and launch your Docker containers:
+In your terminal, navigate to where the Docker files were placed. Execute the command below to build and launch your Docker containers:
 
 ```sh
 docker-compose up -d
@@ -16,8 +16,9 @@ docker-compose up -d
 
 This command installs and starts Docker, setting up your environment.
 
-### 3. Accessing Your Application
-Open your web browser and go to **http://localhost/public/**. You should now be able to see your application running.
+### 3. Set Up the Web Server Root Directory
+A "www" directory has been created, which will serve as the root for your web server. Install MaplePHP within this directory. To view your application, open your web browser and navigate to **http://localhost/public/**. Your application should now be accessible and running smoothly.
+
 
 ## MySQL Configuration
 Below are the default settings for the MySQL service provided in the Docker setup:
