@@ -17,7 +17,6 @@
     ],
     "scripts": {
         "watch": "scss --watch ./resources/scss/style.scss:./public/css/style.css --style compressed",
-        "bundle": "esbuild --bundle ./resources/js/main.js --outdir=./public/js/ --minify --sourcemap",
         "psalm": "psalm ./"
     },
     "require-dev": {

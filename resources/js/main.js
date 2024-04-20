@@ -5,13 +5,12 @@ import { StratoxDom as $ } from '../../node_modules/stratoxdom/src/StratoxDom.js
 import { StratoxModal } from '../../node_modules/stratoxcomponents/src/StratoxModal.js';
 import { StratoxForm } from '../../node_modules/stratoxcomponents/src/StratoxForm.js';
 import { StratoxTable } from '../../node_modules/stratoxcomponents/src/StratoxTable.js';
-//import { ingressComponent } from '../views/jviews/ingress.js';
+import { ingressComponent } from '../views/jviews/ingress.js';
 
 Responder.init({
     lang: "en",
     template: {
         cache: false,
-        directory: "../../../resources/views/jviews/",
         handlers: {
             fields: StratoxTemplate, // Not required (se bellow)
             helper: function() {
@@ -35,7 +34,7 @@ Responder.init({
             Stratox.setComponent("modal", StratoxModal);
             Stratox.setComponent("form", StratoxForm);
             Stratox.setComponent("table", StratoxTable);
-            //Stratox.setComponent("ingress", ingressComponent);
+            Stratox.setComponent("ingress", ingressComponent);
         },
         ready: function (data) {
             // The documnet is ready

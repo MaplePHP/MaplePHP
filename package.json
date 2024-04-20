@@ -1,5 +1,15 @@
 {
+  "scripts": {
+    "dev": "./node_modules/.bin/esbuild ./resources/js/main.js --bundle --outdir=./public/js/ --watch",
+    "build": "./node_modules/.bin/esbuild ./resources/js/main.js --bundle --outdir=./public/js/ --minify --sourcemap"
+  },
+  "devDependencies": {
+    "esbuild": "0.20.2"
+  },
   "dependencies": {
-    "frontresponder": "^1.0.0"
+    "frontresponder": "^1.0.0",
+    "stratox": "^2.2.6",
+    "stratoxcomponents": "^1.1.1",
+    "stratoxdom": "^1.0.0"
   }
 }
