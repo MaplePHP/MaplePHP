@@ -37,3 +37,6 @@
 [submodule "app/Libraries/Foundation"]
 	path = app/Libraries/Foundation
 	url = git@github.com:MaplePHP/Foundation.git
+[submodule "app/Libraries/Prompts"]
+	path = app/Libraries/Prompts
+	url = git@github.com:MaplePHP/Prompts.git
