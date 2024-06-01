@@ -8,32 +8,68 @@
 return [
     "mysql" => [
         'host' => [
-            "prompt" => "host",
+            "type" => "text",
+            "message" => "Set hostname",
             "default" => "localhost",
             "validate" => [
-                "required" => []
+                "length" => [1, 60]
             ]
         ],
         'database' => [
-            "prompt" => "Database name",
+            "type" => "text",
+            "message" => "Database name",
+            "default" => "maplephp",
             "validate" => [
-                "required" => []
+                "length" => [1, 60]
             ]
         ],
-        'username' => 'root',
+        'username' => [
+            "type" => "text",
+            "message" => "Username",
+            "default" => "root",
+            "validate" => [
+                "length" => [1, 60]
+            ]
+        ],
         'password' => [
-            "type" => "masked",
-            "prompt" => "Password"
+            "type" => "password",
+            "message" => "Password",
+            "validate" => [
+                "length" => [0, 60]
+            ]
         ],
         'port' => [
-            "prompt" => "Port",
+            "type" => "text",
+            "message" => "Port",
             "default" => "3306",
             "validate" => [
+                "length" => [1, 4],
                 "int" => []
             ]
         ],
-        'prefix' => 'maple_',
-        'charset' => 'utf8mb4',
-        'collation' => 'utf8mb4_unicode_ci'
+        'prefix' => [
+            "type" => "text",
+            "message" => "Table prefix",
+            "default" => "maple_",
+            "validate" => [
+                "length" => [1, 30]
+            ]
+        ],
+        'charset' => [
+            "type" => "text",
+            "message" => "Set default charset",
+            "default" => "utf8mb4",
+            "validate" => [
+                "length" => [1, 60]
+            ]
+        ],
+        'collation' => [
+            "type" => "text",
+            "message" => "Set default collation",
+            "default" => "utf8mb4_unicode_ci",
+            "validate" => [
+                "length" => [1, 60]
+            ]
+        ]
     ]
 ];

@@ -6,6 +6,7 @@ use MaplePHP\Http\Interfaces\ResponseInterface;
 use MaplePHP\Http\Interfaces\RequestInterface;
 use MaplePHP\Foundation\Http\Provider;
 use Http\Controllers\BaseController;
+use MaplePHP\Query\DB;
 
 class Pages extends BaseController
 {
@@ -23,8 +24,16 @@ class Pages extends BaseController
      * @param  RequestInterface  $request  PSR-7 Request
      * @return ResponseInterface
      */
-    public function start(ResponseInterface $response, RequestInterface $request): ResponseInterface
+    public function start()
     {
+
+
+        $select = DB::select("*", new \database\migrations\Test);
+        $select->join(new \database\migrations\TestCat);
+        print_r($select->fetch());
+        die;
+
+        //
 
         $this->provider->view()->setPartial("main.ingress", [
             "tagline" => "Ingress view partial",
@@ -43,14 +52,6 @@ class Pages extends BaseController
             "name" => "Lorem ipsum dolor",
             "content" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id sapien dui. Nullam gravida bibendum finibus. Pellentesque a elementum augue. Aliquam malesuada et neque ac varius. Nam id eros eros. Ut ut mattis ex. Aliquam molestie tortor quis ultrices euismod. Quisque blandit pellentesque purus, in posuere ex mollis ac."
         ]);
-
-        // Auto clear cache on update and on a future pulish date!
-        // withLastModified will only work with the middleware "LastModifiedHandler"
-        // It will tho automatically be turned off IF session is open to make sure no important
-        // information stays in cache.
-        // return $response->withLastModified("2023-09-04 14:30:00")
-        // ->withExpires($this->date()->withValue("+1 year")->format("Y-01-01"));
-        return $response;
     }
 
     /**
