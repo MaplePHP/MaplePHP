@@ -2,10 +2,14 @@
 
 namespace database\migrations;
 
+use Exception;
 use MaplePHP\Query\AbstractMigrate;
 
 class Test extends AbstractMigrate
 {
+    /**
+     * @throws Exception
+     */
     public function __construct()
     {
         // Table name
@@ -23,27 +27,28 @@ class Test extends AbstractMigrate
             "index" => "primary",
             "ai" => true
 
-        ])->column("user_id", [
+        ])->column("name", [
+            "type" => "varchar",
+            "length" => 160,
+            "collate" => true
+
+        ])->column("content", [
+            "type" => "text",
+            "collate" => true
+
+        ])->column("status", [
             "type" => "int",
             "length" => 11,
             "index" => "index",
             "default" => 0
 
-        ])->column("test", [
-            "type" => "varchar",
-            "length" => 30,
-            "collate" => true
+        ])->column("parent", [
+            "type" => "int",
+            "length" => 11,
+            "index" => "index",
+            "default" => 0
 
-        ])->column("message", [
-            "type" => "text",
-            "collate" => true
-
-        ])->column("data", [ // IF json data is here
-            "type" => "text",
-            "collate" => true,
-            "null" => true
-
-        ])->column("logged_in", [
+        ])->column("create_date", [
             "type" => "datetime",
             "default" => "2000-01-01 00:00:00"
         ]);

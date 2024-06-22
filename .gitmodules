@@ -40,3 +40,6 @@
 [submodule "app/Libraries/Prompts"]
 	path = app/Libraries/Prompts
 	url = git@github.com:MaplePHP/Prompts.git
+[submodule "app/Libraries/Unitary"]
+	path = app/Libraries/Unitary
+	url = git@github.com:MaplePHP/Unitary.git

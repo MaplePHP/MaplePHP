@@ -2,20 +2,23 @@
 
 namespace database\migrations;
 
+use Exception;
 use MaplePHP\Query\AbstractMigrate;
 
-class TestCat extends AbstractMigrate
+class TestCategory extends AbstractMigrate
 {
+    /**
+     * @throws Exception
+     */
     public function __construct()
     {
         // Table name
-        parent::__construct("cat_test");
+        parent::__construct("test_category");
     }
 
     protected function migrateTable(): void
     {
         //$this->mig->drop();
-
         $this->mig->column("cat_id", [
             "type" => "int",
             "length" => 11,
