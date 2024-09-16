@@ -2,8 +2,8 @@
     "name": "maplephp/maplephp",
     "type": "project",
     "description": " MaplePHP is a modern layered structure PHP framework with full PSR support.",
-    "keywords": ["framework", "psr", "php"],
-    "homepage": "https://wazabii.se",
+    "keywords": ["framework", "psr", "php", "mvc", "layered-stack"],
+    "homepage": "https://maplephp.wazabii.se/",
     "license": "Apache-2.0",
     "authors": [
         {
@@ -16,6 +16,10 @@
         }
     ],
     "scripts": {
+        "post-create-project-cmd": [
+            "php maple install",
+            "php maple install:database"
+        ],
         "watch": "scss --watch ./resources/scss/style.scss:./public/css/style.css --style compressed",
         "psalm": "psalm ./"
     },
@@ -23,7 +27,7 @@
         "filp/whoops": "^2.15"
     },
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.2",
         "maplephp/foundation": "^1.0.0"
     },
     "autoload": {

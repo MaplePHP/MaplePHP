@@ -5,13 +5,13 @@
  *
  * Can be used as bellow, this will first search for "sibling param" if not just use "/":
  *
- * {page:(?:.+/|/)vara-bilar}
+ * {page:(?:.+/|/)our-cars}
  *
- * OK: "/PageParam1/PageParam2/vara-bilar"
- * OK: "/vara-bilar"
+ * OK: "/PageParam1/PageParam2/our-cars"
+ * OK: "/our-cars"
  *
  * Add a dynamic route from pages
- * /{page:.+}/{id:\d+}/{permalink:bil-[^/]+}
+ * /{page:.+}/{id:\d+}/{permalink:car-[^/]+}
  *
  * @var object $routes
  */
@@ -30,11 +30,9 @@ $routes->group(function ($routes) {
     $routes->get("/{page:contact}", ['Http\Controllers\Examples\ExampleForm', "contactFrom"]);
     $routes->get("/{page:contact}/{model:modal}", ['Http\Controllers\Examples\ExampleForm', "contactFormModal"]);
     $routes->post("/{page:contact}", ['Http\Controllers\Examples\ExampleForm', "post"]);
-    
 
     $routes->group(function ($routes) {
         // Public login area
-
         // Regular page with form
         $routes->get("/{page:login}", ['Http\Controllers\Private\Login', "form"]);
 
@@ -58,7 +56,6 @@ $routes->group(function ($routes) {
 
     $routes->group(function ($routes) {
         // Private area (The user is logged in)
-
         // Profile page
         $routes->get("/{profile:profile}", ['Http\Controllers\Private\Pages', "profile"]);
 
@@ -69,10 +66,8 @@ $routes->group(function ($routes) {
         [MaplePHP\Foundation\Auth\Middleware\LoggedIn::class, "privateZone"]
     ]);
 
-   
-
 }, [
-    [Http\Middlewares\Document::class, ["after" => ["head", "navigation", "footer"]]],
+    [Http\Middlewares\Document::class, ["before" => ["head", "navigation", "footer"]]],
     //MaplePHP\Foundation\Cache\Middleware\LastModified::class,
     MaplePHP\Foundation\Dom\Middleware\Meta::class,
     MaplePHP\Foundation\Auth\Middleware\SessionStart::class

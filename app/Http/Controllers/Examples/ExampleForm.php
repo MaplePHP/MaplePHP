@@ -29,6 +29,7 @@ class ExampleForm extends BaseController
     public function contactFrom(ResponseInterface $response, RequestInterface $request)
     {
         $this->form->build();
+
         $url = $this->url()->withType(["page"])->add(["modal"])->getUrl();
         $this->view()->setPartial("form", [
             "tagline" => getenv("APP_NAME"),

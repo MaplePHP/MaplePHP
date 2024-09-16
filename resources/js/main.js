@@ -1,10 +1,7 @@
-import { Responder } from '../../node_modules/frontresponder/src/Responder.js';
-import { Stratox } from '../../node_modules/stratox/src/Stratox.js';
-import { StratoxTemplate } from '../../node_modules/stratox/src/StratoxTemplate.js';
+import { Responder } from 'frontresponder/src/Responder';
+import { Stratox, StratoxTemplate } from 'stratox';
 import { StratoxDom as $ } from '../../node_modules/stratoxdom/src/StratoxDom.js';
-import { StratoxModal } from '../../node_modules/stratoxcomponents/src/StratoxModal.js';
-import { StratoxForm } from '../../node_modules/stratoxcomponents/src/StratoxForm.js';
-import { StratoxTable } from '../../node_modules/stratoxcomponents/src/StratoxTable.js';
+import { StratoxModal, StratoxForm, StratoxTable } from 'stratoxcomponents';
 import { ingressComponent } from '../views/jviews/ingress.js';
 
 Responder.init({
@@ -26,7 +23,7 @@ Responder.init({
         403: "403 Forbidden",
         404: "404 The page could not be found",
         414: "414 Request-URI Too Long",
-        500: "500 Internal Server Error, try agin later",
+        500: "500 Internal Server Error, try again later",
         503: "503 Service Unavailable"
     },
     responder: {
@@ -37,7 +34,7 @@ Responder.init({
             Stratox.setComponent("ingress", ingressComponent);
         },
         ready: function (data) {
-            // The documnet is ready
+            // The document is ready
             // Your code here
         },
         update: function (data) {

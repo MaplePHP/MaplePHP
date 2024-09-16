@@ -2,16 +2,14 @@
 
 namespace Http\Middlewares;
 
-use MaplePHP\Handler\Interfaces\MiddlewareInterface;
-use MaplePHP\Http\Interfaces\ResponseInterface;
-use MaplePHP\Http\Interfaces\RequestInterface;
 use MaplePHP\Foundation\Http\Provider;
 use MaplePHP\Foundation\Nav\Navbar;
+use MaplePHP\Handler\Interfaces\MiddlewareInterface;
 
 class Document implements MiddlewareInterface
 {
-    private $provider;
-    private $nav;
+    private Provider $provider;
+    private Navbar $nav;
 
     public function __construct(Provider $provider, Navbar $nav)
     {
@@ -21,35 +19,28 @@ class Document implements MiddlewareInterface
 
     /**
      * Will load before the controllers
-     * @param  ResponseInterface $response
-     * @param  RequestInterface  $request
-     * @return ResponseInterface|void
+     * @return void
      */
-    public function before(ResponseInterface $response, RequestInterface $request)
+    public function before(): void
     {
     }
 
     /**
      * Add head to the document
-     * @param  ResponseInterface $response
-     * @param  RequestInterface  $request
-     * @return ResponseInterface|void
+     * @return void
      */
-    public function head(ResponseInterface $response, RequestInterface $request)
+    public function head(): void
     {
         // Partial in document director
         // The exclamation character will disable thrown error, if you remove the partial template file.
         $this->provider->view()->setPartial("head.!document/head");
-
     }
 
     /**
      * Add head to the document
-     * @param  ResponseInterface $response
-     * @param  RequestInterface  $request
-     * @return ResponseInterface|void
+     * @return void
      */
-    public function navigation(ResponseInterface $response, RequestInterface $request)
+    public function navigation(): void
     {
         // Partial in document director
         // The exclamation character will disable thrown error, if you remove the partial template file.
@@ -60,11 +51,9 @@ class Document implements MiddlewareInterface
 
     /**
      * Add footer to the document
-     * @param  ResponseInterface $response
-     * @param  RequestInterface  $request
-     * @return ResponseInterface|void
+     * @return void
      */
-    public function footer(ResponseInterface $response, RequestInterface $request)
+    public function footer(): void
     {
         // Partial in document director
         // The exclamation character will disable thrown error, if you remove the partial template file.
@@ -76,12 +65,9 @@ class Document implements MiddlewareInterface
 
     /**
      * Will load after the controllers
-     * @param  ResponseInterface $response
-     * @param  RequestInterface  $request
-     * @return ResponseInterface|void
+     * @return void
      */
-    public function after(ResponseInterface $response, RequestInterface $request)
+    public function after(): void
     {
-
     }
 }

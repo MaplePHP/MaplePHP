@@ -12,31 +12,17 @@ namespace Http\Middlewares;
 use MaplePHP\Handler\Interfaces\MiddlewareInterface;
 use MaplePHP\Http\Interfaces\ResponseInterface;
 use MaplePHP\Http\Interfaces\RequestInterface;
-use MaplePHP\Foundation\Http\Provider;
 use MaplePHP\Foundation\Nav\Middleware\Navigation;
-use MaplePHP\Foundation\Nav\Navbar;
 
 class Nav extends Navigation implements MiddlewareInterface
 {
-    protected $provider;
-    protected $nav;
-
-    public function __construct(Provider $provider, Navbar $nav)
-    {
-        $this->provider = $provider;
-        $this->nav = $nav;
-    }
-
     /**
      * Before controllers
-     * @param  ResponseInterface $response
-     * @param  RequestInterface  $request
-     * @return ResponseInterface|void
+     * @return ResponseInterface
      */
-    public function before(ResponseInterface $response, RequestInterface $request)
+    public function before()
     {
-
-        // You can use this middelware to create an dynamic navigation
+        // You can use this middleware to create a dynamic navigation
         // The id is not required, but will create it´s own id with increment, starting from 1 if not filled in. 
         // The id is used to select parent!
         $this->nav->add("main", [
@@ -46,7 +32,7 @@ class Nav extends Navigation implements MiddlewareInterface
             "parent" => 0,
             "title" => "Meta title start",
             "description" => "Meta description start"
-            
+
         ])->add("main", [
             "id" => 2,
             "name" => "Contact",
@@ -57,19 +43,15 @@ class Nav extends Navigation implements MiddlewareInterface
         ]);
 
         // Will build the navigation
-        return parent::before($response, $request);
+        //parent::before();
     }
 
     /**
      * After controllers
-     * @param  ResponseInterface $response
-     * @param  RequestInterface  $request
      * @return void
      */
-    public function after(ResponseInterface $response, RequestInterface $request)
+    public function after()
     {
-
     }
-
 
 }
