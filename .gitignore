@@ -1,10 +1,11 @@
 .idea/
 vendor/
 public/js/*
-node_modules/.package-lock.json
+node_modules/
 storage/logs/*.log
 storage/caches/*.cache
 ._*
+*.log
 .DS_Store
 .sass-cache
 .env

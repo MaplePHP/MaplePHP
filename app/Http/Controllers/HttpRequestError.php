@@ -3,10 +3,13 @@
 namespace Http\Controllers;
 
 use MaplePHP\Http\Interfaces\ResponseInterface;
-use MaplePHP\Http\Interfaces\RequestInterface;
 use MaplePHP\Foundation\Http\Provider;
-use Http\Controllers\BaseController;
 
+/**
+ * @method local(string $string)
+ * @method head()
+ * @method view()
+ */
 class HttpRequestError extends BaseController
 {
     public function __construct(Provider $provider)
@@ -17,12 +20,10 @@ class HttpRequestError extends BaseController
      * Handle 404, 403, ... Errors
      * @Route[*:[/{any:.*}]]
      * @param  ResponseInterface $response
-     * @param  RequestInterface  $request
      * @return ResponseInterface
      */
-    public function handleError(ResponseInterface $response, RequestInterface $request)
+    public function handleError(ResponseInterface $response): ResponseInterface
     {
-
         $response = $response->withStatus(404);
         $title = $this->local("auth")->get(("httpStatus" . $response->getStatusCode()), $response->getReasonPhrase());
 
@@ -30,7 +31,7 @@ class HttpRequestError extends BaseController
         $this->head()->getElement("title")->setValue($title);
         $this->head()->getElement("description")->attr("content", $title);
 
-        // This partial named "httpStatus" will auto attach it self to the View
+        // This partial named "httpStatus" will auto attach itself to the View
         $this->view()->setPartial("httpStatus", [
             "headline" => $title,
             "content" => $this->local("auth")->get(("httpStatusContent"), $response->getReasonPhrase(), [$title])

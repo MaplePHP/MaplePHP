@@ -43,3 +43,6 @@
 [submodule "app/Libraries/Unitary"]
 	path = app/Libraries/Unitary
 	url = git@github.com:MaplePHP/Unitary.git
+[submodule "app/Libraries/Blunder"]
+	path = app/Libraries/Blunder
+	url = git@github.com:MaplePHP/Blunder.git

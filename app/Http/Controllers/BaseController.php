@@ -6,6 +6,18 @@ use MaplePHP\Container\Interfaces\ContainerInterface;
 use MaplePHP\Foundation\Http\Provider;
 use BadMethodCallException;
 
+/**
+ * @method local(string $string)
+ * @method env(string $key, string $fallback = "")
+ * @method encode(array|string $value)
+ * @method DB(?string $key = null)
+ * @method head()
+ * @method url()
+ * @method dir()
+ * @method response()
+ * @method request()
+ * @method view()
+ */
 abstract class BaseController
 {
     /**

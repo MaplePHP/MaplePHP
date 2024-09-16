@@ -6,7 +6,7 @@
  */
 
 return [
-    "mysql" => [
+    "mysql|mariadb|postgresql" => [
         'host' => [
             "type" => "text",
             "message" => "Set hostname",
@@ -69,6 +69,28 @@ return [
             "default" => "utf8mb4_unicode_ci",
             "validate" => [
                 "length" => [1, 60]
+            ]
+        ]
+    ],
+    "sqlite" => [
+        'database' => [
+            "type" => "text",
+            "message" => "Database name",
+            "default" => "database",
+            "validate" => [
+                "length" => [1, 80],
+                "pregMatch" => ['a-zA-Z_']
+            ]
+        ],
+        'prefix' => [
+            "type" => "text",
+            "message" => "Table prefix",
+            "default" => "maple_",
+            "validate" => [
+                "length" => [1, 30],
+                "custom" => function() {
+                    return false;
+                }
             ]
         ]
     ]

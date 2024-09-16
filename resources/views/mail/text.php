@@ -85,23 +85,23 @@ strong, .h2, .h3 { font-weight: bold; }
                         </td>
                     </tr>
 
-                    <?php foreach ($obj->section()->fetch()->get() as $row) : ?>
+                    <?php foreach ($obj->section->fetch() as $row) : ?>
                     <tr>
                         <td class="section-2 border-bottom">
                             <table width="570" border="0" cellspacing="0" cellpadding="0">
-                                <?php if ($tagline = $row->tagline()->isset()) : ?>
+                                <?php if ($tag = $row->tagline->isset()) : ?>
                                 <tr>
-                                    <td class="h4 title"><?php echo $tagline; ?></td>
+                                    <td class="h4 title"><?php echo $tag; ?></td>
                                 </tr>
                                 <?php endif; ?>
-                                <?php if ($headline = $row->headline()->isset()) : ?>
+                                <?php if ($headline = $row->headline->isset()) : ?>
                                 <tr>
                                     <td class="h1 title"><?php echo $headline; ?></td>
                                 </tr>
                                 <?php endif; ?>
 
-                                <?php if ($row->content()->count() > 0) : ?>
-                                    <?php foreach ($row->content()->fetch()->get() as $r) : ?>
+                                <?php if ($row->content->count() > 0) : ?>
+                                    <?php foreach ($row->content->fetch() as $r) : ?>
                                 <tr>
                                         <?php if ($this->isEl($r)) : ?>
                                             <?php echo $r->setElement("td"); ?>
@@ -117,15 +117,15 @@ strong, .h2, .h3 { font-weight: bold; }
                                 <?php else : ?>
                                 <tr>
                                     <td class="para-2">
-                                        <?php echo $row->content()->get("Fill in content"); ?>
+                                        <?php echo $row->content->get("Fill in content"); ?>
                                     </td>
                                 </tr>
                                 <?php endif; ?>
                                 <?php if (isset($row->button['url'])) : ?>
                                 <tr>
                                     <td class="spacer-15">
-                                        <a class="button" href="<?php echo $row->button['url']; ?>" target="_blank"><?php echo $row->button()->title()->get("Fill in button[title]"); ?></a>
-                                        <?php echo $row->button()->legend()->sprint("<div class=\"legend spacer-10\">%s</div>")->get(); ?>
+                                        <a class="button" href="<?php echo $row->button['url']; ?>" target="_blank"><?php echo $row->button->title->get("Fill in button[title]"); ?></a>
+                                        <?php echo $row->button->legend->sprint("<div class=\"legend spacer-10\">%s</div>")->get(); ?>
                                     </td>
                                 </tr>
                                 <?php endif; ?>
@@ -134,14 +134,14 @@ strong, .h2, .h3 { font-weight: bold; }
                     </tr>
                     <?php endforeach; ?>
 
-                    <?php if ($obj->footer()->count() > 0) : ?>
+                    <?php if ($obj->footer->count() > 0) : ?>
                     <tr>
                         <td id="footer" class="section-2">
                             <table width="570" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td class="para-3 center">
-                                        <?php echo $obj->footer()->headline()->sprint("<strong>%s</strong><br>")->get(); ?>
-                                        <?php echo $obj->footer()->content()->get(); ?>
+                                        <?php echo $obj->footer->headline->sprint("<strong>%s</strong><br>")->get(); ?>
+                                        <?php echo $obj->footer->content->get(); ?>
                                     </td>
                                 </tr>
                             </table>

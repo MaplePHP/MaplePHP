@@ -1,10 +1,14 @@
 {
   "scripts": {
-    "dev": "./node_modules/.bin/esbuild ./resources/js/main.js --bundle --outdir=./public/js/ --watch",
-    "build": "./node_modules/.bin/esbuild ./resources/js/main.js --bundle --outdir=./public/js/ --minify --sourcemap"
+    "dev": "esbuild ./resources/js/main.js --bundle --outdir=./public/js/ --watch",
+    "devTest": "postcss resources/style.css -o public/css/style2.css --watch",
+    "build": "esbuild ./resources/js/main.js --bundle --outdir=./public/js/ --minify --sourcemap"
   },
   "devDependencies": {
-    "esbuild": "0.20.2"
+    "autoprefixer": "^10.4.20",
+    "esbuild": "0.20.2",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.10"
   },
   "dependencies": {
     "frontresponder": "^1.0.0",
