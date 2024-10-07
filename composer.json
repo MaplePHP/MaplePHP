@@ -17,6 +17,7 @@
     ],
     "scripts": {
         "watch": "scss --watch ./resources/scss/style.scss:./public/css/style.css --style compressed",
+        "bundle": "esbuild --bundle ./resources/js/main.js --outdir=./public/js/ --minify --sourcemap",
         "psalm": "psalm ./"
     },
     "require-dev": {
@@ -24,7 +25,8 @@
     },
     "require": {
         "php": ">=8.0",
-        "maplephp/foundation": "^1.0.0"
+        "maplephp/http": "1.0.6",
+        "maplephp/foundation": "1.3.7"
     },
     "autoload": {
         "psr-4": {
