@@ -2,6 +2,8 @@
 
 # MaplePHP - Layered structure MVC PHP framework
 
+## MaplePHP is currently in beta, and significant changes are expected.
+
 **MaplePHP is a layered structure MVC PHP framework** that very user-friendly and does not compromise on performance or scalability. By leveraging a modular architecture and with full PSR support, the framework allows for easy customization and flexibility, enabling developers to pick and choose the specific components they need to build their applications.
 
 ## Documentation
